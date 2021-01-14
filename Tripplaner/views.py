@@ -22,6 +22,41 @@ def Login(request):
     
     pass
 
+def getUserByID(request):
+    id = request.GET['id']
+    ac = Account.objects.all()
+    for acci in ac:
+        if id == acci.getIDUser():
+            obj = {"idUser": acci.getIDUser(), "userName": acci.getUserName(), "name": acci.getName(), "dateOfBirth": acci.getDateOfBirth(), "placeOfBirth": acci.getPlaceOfBirth()}
+            return JsonResponse(obj)
+            break
+        else:
+            continue
+    return HttpResponse('Fail')
+    
+    pass
+
+def changeUserbyID(request):
+    id = request.POST['id']
+    name = request.POST['name']
+    date = request.POST['date']
+    place = request.POST['place']
+    ac = Account.objects.all()
+    for acci in ac:
+        if id == acci.getIDUser():
+            acci.name = name
+            acci.dateOfBirth = date
+            acci.placeOfBirth = place
+            acci.save()
+            obj = {"result": 1}
+            return JsonResponse(obj)
+            break
+        else:
+            continue
+    obj = {"result": 0}
+    return JsonResponse(obj)
+    
+    pass
 def Signup(request):
     uname = request.GET['u']
     passw = request.GET['p']
@@ -56,6 +91,19 @@ def getTripUser(request):
     return JsonResponse(res)
     pass
 
+def getTripByID(request):
+    id = request.GET['id']
+    result = []
+    trip = Trip.objects.all()
+    for tripi in trip:
+        idTrip =  tripi.getIDTrip()
+        if id == idTrip.idTrip:
+            obj = {"idTrip": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
+            result.append(obj)
+    res = {"result": result}
+    return JsonResponse(res)
+    pass
+
 def addTrip(request):
     idu = request.GET['idu']
     name = request.GET['name']
@@ -77,12 +125,25 @@ def addTrip(request):
 
 
 def getExpenseTrip(request):
-    id = request.GET['t']
+    id = request.GET['id']
     result = []
     expense = Expense.objects.all()
     for exi in expense:
         idTrip =  exi.getIDTrip()
         if id == idTrip.idTrip:
+            obj = {"idExpense": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "typeExpense": exi.getTypeExpense()}        
+            result.append(obj)
+    res = {"result": result}
+    return JsonResponse(res)
+    pass
+
+def getExpensebyID(request):
+    id = request.GET['id']
+    result = []
+    expense = Expense.objects.all()
+    for exi in expense:
+        idExpense =  exi.getIDExpense()
+        if id == idExpense.idExpense:
             obj = {"idExpense": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "typeExpense": exi.getTypeExpense()}        
             result.append(obj)
     res = {"result": result}
