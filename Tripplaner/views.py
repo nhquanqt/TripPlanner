@@ -1,7 +1,10 @@
+import json
+import os
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import FileResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import *
 # Create your views here.
 def Login(request):
@@ -13,7 +16,7 @@ def Login(request):
         truename = acci.getUserName()
         truepass = acci.getPassword()
         if uname == truename and passw == truepass:
-            obj = {"idUser": acci.getIDUser(), "userName": acci.getUserName(), "name": acci.getName(), "dateOfBirth": acci.getDateOfBirth(), "placeOfBirth": acci.getPlaceOfBirth()}
+            obj = {"id": acci.getIDUser(), "username": acci.getUserName(), "name": acci.getName(), "dateOfBirth": acci.getDateOfBirth(), "placeOfBirth": acci.getPlaceOfBirth()}
             return JsonResponse(obj)
             break
         else:
@@ -27,7 +30,7 @@ def getUserByID(request):
     ac = Account.objects.all()
     for acci in ac:
         if id == acci.getIDUser():
-            obj = {"idUser": acci.getIDUser(), "userName": acci.getUserName(), "name": acci.getName(), "dateOfBirth": acci.getDateOfBirth(), "placeOfBirth": acci.getPlaceOfBirth()}
+            obj = {"id": acci.getIDUser(), "username": acci.getUserName(), "name": acci.getName(), "dateOfBirth": acci.getDateOfBirth(), "placeOfBirth": acci.getPlaceOfBirth()}
             return JsonResponse(obj)
             break
         else:
@@ -36,27 +39,18 @@ def getUserByID(request):
     
     pass
 
-def changeUserbyID(request):
-    id = request.POST['id']
-    name = request.POST['name']
-    date = request.POST['date']
-    place = request.POST['place']
-    ac = Account.objects.all()
-    for acci in ac:
-        if id == acci.getIDUser():
-            acci.name = name
-            acci.dateOfBirth = date
-            acci.placeOfBirth = place
-            acci.save()
-            obj = {"result": 1}
-            return JsonResponse(obj)
-            break
-        else:
-            continue
-    obj = {"result": 0}
+@csrf_exempt
+def changeUser(request):
+    id = request.GET['id']
+    name = request.GET['name']
+    date = request.GET['date']
+    place = request.GET['place']
+    Account.objects.filter(idUser=id).update(name=name,dateOfBirth=date, placeOfBirth=place)
+    obj = {"result": 1}
     return JsonResponse(obj)
-    
     pass
+
+@csrf_exempt
 def Signup(request):
     uname = request.GET['u']
     passw = request.GET['p']
@@ -67,25 +61,25 @@ def Signup(request):
         truename = acci.getUserName()
         ID = max(int(ID),int(acci.getIDUser()))
         if uname == truename :
-            obj = {"idUser": ""}
+            obj = {"result": 0}
             return JsonResponse(obj)
             break
         else:
             continue
     ID = str(int(ID) + 1)
     Account.objects.create(idUser = ID, userName = uname, password = passw)
-    obj = {"idUser": ID}
+    obj = {"result": 1}
     return JsonResponse(obj)
     pass
 
-def getTripUser(request):
+def getTrip(request):
     id = request.GET['id']
     result = []
     trip = Trip.objects.all()
     for tripi in trip:
         idUser =  tripi.getIDUser()
         if id == idUser.idUser:
-            obj = {"idTrip": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
+            obj = {"id": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
             result.append(obj)
     res = {"result": result}
     return JsonResponse(res)
@@ -98,11 +92,23 @@ def getTripByID(request):
     for tripi in trip:
         idTrip =  tripi.getIDTrip()
         if id == idTrip.idTrip:
-            obj = {"idTrip": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
+            obj = {"id": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
             result.append(obj)
     res = {"result": result}
     return JsonResponse(res)
     pass
+
+def changeTrip(request):
+    id = request.GET['id']
+    name = request.GET['name']
+    bud = request.GET['bud']
+    start = request.GET['start']
+    end = request.GET['end']
+    dep = request.GET['dep']
+   
+    Trip.objects.filter(idTrip=id).update(tripName=name, budget=bud, startDate=start,endDate=end,departure=dep)
+    obj = {"result": 1}
+    return JsonResponse(obj)
 
 def addTrip(request):
     idu = request.GET['idu']
@@ -119,7 +125,7 @@ def addTrip(request):
     idUser = Account.objects.get(idUser=idu)
     ID = str(int(ID) + 1)
     Trip.objects.create(idTrip = ID, idUser = idUser, tripName=name, budget=bud, startDate=start, endDate=end, departure=dep)
-    obj = {"idTrip": ID}
+    obj = {"result": 1}
     return JsonResponse(obj)
     pass
 
@@ -131,7 +137,7 @@ def getExpenseTrip(request):
     for exi in expense:
         idTrip =  exi.getIDTrip()
         if id == idTrip.idTrip:
-            obj = {"idExpense": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "typeExpense": exi.getTypeExpense()}        
+            obj = {"id": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "type": exi.getTypeExpense()}        
             result.append(obj)
     res = {"result": result}
     return JsonResponse(res)
@@ -142,13 +148,22 @@ def getExpensebyID(request):
     result = []
     expense = Expense.objects.all()
     for exi in expense:
-        idExpense =  exi.getIDExpense()
+        idExpense = exi.getIDExpense()
         if id == idExpense.idExpense:
-            obj = {"idExpense": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "typeExpense": exi.getTypeExpense()}        
+            obj = {"id": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "type": exi.getTypeExpense()}        
             result.append(obj)
     res = {"result": result}
     return JsonResponse(res)
     pass
+
+def changExpense(request):
+    id = request.GET['id']
+    name = request.GET['name']
+    cost = request.GET['cost']
+    typ = request.GET['type']
+    Expense.objects.filter(idTrip=id).update(expenseName=name, cost=cost, typeExpense=typ)
+    obj = {"result": 1}
+    return JsonResponse(obj)
 
 def addExpense(request):
     idt = request.GET['idt']
@@ -163,6 +178,6 @@ def addExpense(request):
     idTrip = Trip.objects.get(idTrip=idt)
     ID = str(int(ID) + 1)
     Expense.objects.create(idExpense= ID, idTrip = idTrip, expenseName=name, cost=cost, typeExpense=typ)
-    obj = {"idExpense": ID}
+    obj = {"result": 1}
     return JsonResponse(obj)
     pass
