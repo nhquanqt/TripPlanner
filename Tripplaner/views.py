@@ -51,7 +51,7 @@ def updateUser(request):
     dateOfBirth = body['dateOfBirth']
     placeOfBirth = body['placeOfBirth']
     Account.objects.filter(idUser=id).update(name=name,dateOfBirth=dateOfBirth, placeOfBirth=placeOfBirth)
-    obj = {"result": 1}
+    obj = {"result": True}
     return JsonResponse(obj)
     pass
 
@@ -70,14 +70,14 @@ def Signup(request):
         truename = acci.getUserName()
         ID = max(int(ID),int(acci.getIDUser()))
         if uname == truename :
-            obj = {"result": 0}
+            obj = {"result": False}
             return JsonResponse(obj)
             break
         else:
             continue
     ID = str(int(ID) + 1)
     Account.objects.create(idUser = ID, userName = uname, password = passw,name=name)
-    obj = {"result": 1}
+    obj = {"result": True}
     return JsonResponse(obj)
     pass
 
@@ -120,7 +120,7 @@ def updateTrip(request):
     dep = body['departure']
    
     Trip.objects.filter(idTrip=id).update(tripName=name, budget=bud, startDate=start,endDate=end,departure=dep)
-    obj = {"result": 1}
+    obj = {"result": True}
     return JsonResponse(obj)
 
 @csrf_exempt
@@ -141,7 +141,7 @@ def addTrip(request):
     idUser = Account.objects.get(idUser=idu)
     ID = str(int(ID) + 1)
     Trip.objects.create(idTrip = ID, idUser = idUser, tripName=name, budget=bud, startDate=start, endDate=end, departure=dep)
-    obj = {"result": 1}
+    obj = {"result": True}
     return JsonResponse(obj)
     pass
 
@@ -182,7 +182,7 @@ def updateExpense(request):
     cost = body['cost']
     typ = body['type']
     Expense.objects.filter(idTrip=id).update(expenseName=name, cost=cost, typeExpense=typ)
-    obj = {"result": 1}
+    obj = {"result": True}
     return JsonResponse(obj)
 
 @csrf_exempt
@@ -202,6 +202,6 @@ def addExpense(request):
     idTrip = Trip.objects.get(idTrip=idt)
     ID = str(int(ID) + 1)
     Expense.objects.create(idExpense= ID, idTrip = idTrip, expenseName=name, cost=cost, typeExpense=typ)
-    obj = {"result": 1}
+    obj = {"result": True}
     return JsonResponse(obj)
     pass

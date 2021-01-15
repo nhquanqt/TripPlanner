@@ -20,7 +20,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('updateuser', views.updateUser),
+    path('user/update', views.updateUser),
     #http://192.168.1.3:8080/updateuser
     # {
     # "id": "1",
@@ -75,7 +75,7 @@ urlpatterns = [
 
     url(r'^login', views.Login),
     #http://192.168.1.3:8080/login?u=fit18&p=fit18
-    url(r'^getuserbyid', views.getUserByID),
+    url(r'^user', views.getUserByID),
     #http://192.168.1.3:8080/getuserbyid?id=1
     url(r'^trip', views.getTrip),
     #http://192.168.1.3:8080/trip?id=1
