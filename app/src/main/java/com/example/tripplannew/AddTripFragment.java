@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.local.Trip;
+import com.example.tripplannew.data.webservice.Trip;
 import com.example.tripplannew.viewmodels.MapViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
 
@@ -54,8 +54,7 @@ public class AddTripFragment extends Fragment {
         mBtnSubmitTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTrip();
-                Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_listTripFragment);
+                addTrip(v);
             }
         });
 
@@ -117,7 +116,7 @@ public class AddTripFragment extends Fragment {
         });
     }
 
-    private void addTrip()
+    private void addTrip(View v)
     {
         String tripName = ((EditText)getActivity().findViewById(R.id.etTrip)).getText().toString();
         String stringBudget = ((EditText)getActivity().findViewById(R.id.etBudget)).getText().toString();
@@ -128,7 +127,10 @@ public class AddTripFragment extends Fragment {
 
         if(stringBudget.length() == 0) stringBudget = "0";
         float budget = Float.parseFloat(stringBudget);
-        mTripListViewModel.insert(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure));
+//        mTripListViewModel.insert(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure));
+        mTripListViewModel.addTrip(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure)).observe(getActivity(), status -> {
+            Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_listTripFragment);
+        });
     }
 
     private void showCalendar(DatePickerDialog.OnDateSetListener tv){

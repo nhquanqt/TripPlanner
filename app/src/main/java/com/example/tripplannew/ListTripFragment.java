@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.tripplannew.adapters.TripArrayAdapter;
-import com.example.tripplannew.data.local.Trip;
+import com.example.tripplannew.data.webservice.Trip;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 import com.example.tripplannew.viewmodels.SettingViewModel;
 import com.example.tripplannew.viewmodels.TripInfoViewModel;
@@ -79,9 +79,9 @@ public class ListTripFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(mTripArray != null)
                 {
-                    Trip trip = mTripArray.get(position);
+                    com.example.tripplannew.data.webservice.Trip trip = mTripArray.get(position);
                     mExpenseListViewModel.setTripId(trip.getId());
-                    mExpenseListViewModel.setTrip(trip);
+//                    mExpenseListViewModel.setTrip(trip);
                     Navigation.findNavController(view).navigate(R.id.action_listTripFragment_to_listExpenseFragment);
                 }
             }

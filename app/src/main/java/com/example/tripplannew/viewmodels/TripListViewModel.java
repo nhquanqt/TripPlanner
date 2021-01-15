@@ -1,44 +1,45 @@
 package com.example.tripplannew.viewmodels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tripplannew.data.local.Trip;
-import com.example.tripplannew.data.local.TripRepository;
+import com.example.tripplannew.data.webservice.Trip;
+import com.example.tripplannew.data.webservice.TripRepository;
 
 import java.util.List;
 
 public class TripListViewModel extends AndroidViewModel {
 
-    private TripRepository mRepository;
+    private com.example.tripplannew.data.local.TripRepository mRepository;
+    private TripRepository mWebRepository;
     private String mUserId;
 
     public TripListViewModel(Application application)
     {
         super(application);
-        mRepository = new TripRepository(application);
+        mRepository = new com.example.tripplannew.data.local.TripRepository(application);
+        mWebRepository = new TripRepository();
     }
 
-    public void insert(Trip trip)
+    public LiveData<Boolean> addTrip(Trip trip)
     {
-        mRepository.insert(trip);
+        return mWebRepository.addTrip(trip);
     }
 
     public LiveData<List<Trip>> getAllTrips()
     {
-        return mRepository.getAllTrips(mUserId);
+        return mWebRepository.getTripsByUserId(mUserId);
     }
 
-    public void deleteTrip(Trip trip)
+    public LiveData<Boolean> deleteTrip(Trip trip)
     {
-        mRepository.deleteTrip(trip);
+        return mWebRepository.deleteTrip(trip);
     }
     public void updateTrip(Trip trip)
     {
-        mRepository.updateTrip(trip);
+        mWebRepository.updateTrip(trip);
     }
 
     public void setUserId(String userId)

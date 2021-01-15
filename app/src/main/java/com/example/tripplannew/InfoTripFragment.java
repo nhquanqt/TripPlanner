@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.local.Trip;
+import com.example.tripplannew.data.webservice.Trip;
 import com.example.tripplannew.viewmodels.MapViewModel;
 import com.example.tripplannew.viewmodels.TripInfoViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
@@ -74,7 +74,7 @@ public class InfoTripFragment extends Fragment {
         mTripInfoViewModel.getTrip().observe(getActivity(), trip -> {
             mTrip = trip;
             mEtTrip.setText(trip.getTripName());
-            mEtBudget.setText(String.valueOf((int)trip.getBudget()));
+            mEtBudget.setText(String.valueOf(trip.getBudget()));
             mBtnStartDate.setText(trip.getStartDate());
             mBtnEndDate.setText(trip.getEndDate());
             mBtnDeparture.setText(trip.getDeparture());
@@ -136,8 +136,9 @@ public class InfoTripFragment extends Fragment {
         mBtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTripListViewModel.deleteTrip(mTrip);
-                Navigation.findNavController(v).navigate(R.id.action_infoTripFragment_to_listTripFragment);
+                mTripListViewModel.deleteTrip(mTrip).observe(getActivity(), status -> {
+                    Navigation.findNavController(v).navigate(R.id.action_infoTripFragment_to_listTripFragment);
+                });
             }
         });
 
