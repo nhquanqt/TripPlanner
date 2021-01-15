@@ -77,7 +77,7 @@ urlpatterns = [
     #http://192.168.1.3:8080/login?u=fit18&p=fit18
     url(r'^user', views.getUserByID),
     #http://192.168.1.3:8080/getuserbyid?id=1
-    url(r'^trip', views.getTrip),
+    url(r'^trips', views.getTripsByUserID),
     #http://192.168.1.3:8080/trip?id=1
     url(r'^gettripbyID', views.getTripByID),
     #http://192.168.1.3:8080/gettripbyID?id=1

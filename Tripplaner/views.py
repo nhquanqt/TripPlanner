@@ -81,8 +81,8 @@ def Signup(request):
     return JsonResponse(obj)
     pass
 
-def getTrip(request):
-    id = request.GET['id']
+def getTripsByUserID(request):
+    id = request.GET['userId']
     result = []
     trip = Trip.objects.all()
     for tripi in trip:
