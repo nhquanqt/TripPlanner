@@ -81,7 +81,7 @@ public class ListTripFragment extends Fragment {
                 {
                     com.example.tripplannew.data.webservice.Trip trip = mTripArray.get(position);
                     mExpenseListViewModel.setTripId(trip.getId());
-//                    mExpenseListViewModel.setTrip(trip);
+                    mExpenseListViewModel.setTrip(trip);
                     Navigation.findNavController(view).navigate(R.id.action_listTripFragment_to_listExpenseFragment);
                 }
             }
