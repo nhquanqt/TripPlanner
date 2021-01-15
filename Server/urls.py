@@ -35,7 +35,7 @@ urlpatterns = [
     # "password": "1",
     # "name": "12"
     # }
-    path('updatetrip', views.updateTrip),
+    path('trip/update', views.updateTrip),
     #http://192.168.1.3:8080/updatetrip
     # {
     # "id": "1", 
@@ -45,7 +45,7 @@ urlpatterns = [
     # "endDate": "13", 
     # "departure": "HCM1"
     # }
-    path('addtrip', views.addTrip),
+    path('trip/add', views.addTrip),
     #http://192.168.1.3:8080/addtrip
     # {
     # "idUser": "1", 
@@ -60,7 +60,7 @@ urlpatterns = [
     # {
     # "id": "3"
     # }
-    path('updateexpense', views.updateExpense),
+    path('expense/update', views.updateExpense),
     #http://192.168.1.3:8080/updateexpense
     # {
     # "id": "1", 
@@ -69,7 +69,7 @@ urlpatterns = [
     # "type": 3
     # }
 
-    path('addexpense', views.addExpense),
+    path('expense/add', views.addExpense),
     #http://192.168.1.3:8080/addexpense
     # {
     # "idTrip": "1", 
