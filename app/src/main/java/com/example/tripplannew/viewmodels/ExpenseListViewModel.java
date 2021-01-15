@@ -5,15 +5,16 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tripplannew.data.Expense;
-import com.example.tripplannew.data.ExpenseRepository;
-import com.example.tripplannew.data.Trip;
+import com.example.tripplannew.data.webservice.Expense;
+import com.example.tripplannew.data.local.ExpenseRepository;
+import com.example.tripplannew.data.webservice.Trip;
 
 import java.util.List;
 
 public class ExpenseListViewModel extends AndroidViewModel {
 
     private ExpenseRepository mRepository;
+    private com.example.tripplannew.data.webservice.ExpenseRepository mWebRepository;
     private String mTripId;
     private Trip mTrip;
 
@@ -21,21 +22,29 @@ public class ExpenseListViewModel extends AndroidViewModel {
     {
         super(application);
         mRepository = new ExpenseRepository(application);
+        mWebRepository = new com.example.tripplannew.data.webservice.ExpenseRepository();
     }
 
-    public void insert(Expense expense)
+//    public void insert(Expense expense)
+//    {
+////        mRepository.insert(expense);
+//    }
+
+    public void addExpense(Expense expense)
     {
-        mRepository.insert(expense);
+        mWebRepository.addExpense(expense);
     }
 
-    public LiveData<List<Expense>> getAllExpenses()
+    public LiveData<List<com.example.tripplannew.data.webservice.Expense>> getAllExpenses()
     {
-        return mRepository.getAllExpenses(mTripId);
+        return mWebRepository.getExpensesByTripId(mTripId);
+//        return mRepository.getAllExpenses(mTripId);
     }
 
-    public void deleteExpense(Expense expense)
+    public LiveData<Boolean> deleteExpense(Expense expense)
     {
-        mRepository.deleteExpense(expense);
+        return mWebRepository.deleteExpense(expense);
+//        mRepository.deleteExpense(expense);
     }
 
     public void setTripId(String tripId)

@@ -1,6 +1,5 @@
 package com.example.tripplannew;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.Expense;
+import com.example.tripplannew.data.webservice.Expense;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 import com.example.tripplannew.viewmodels.MapViewModel;
 
@@ -108,13 +107,15 @@ public class AddExpenseFragment extends Fragment {
         int type;
         int cost = 0;
         if (item_type.equals("Food"))
-            type = R.drawable.food;
+            type = Expense.TYPE_FOOD;
         else
-            type = R.drawable.drink;
+            type = Expense.TYPE_DRINK;
         if ((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())).length() != 0)
             cost = Integer.parseInt((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())));
 
-        mExpenseListViewModel.insert(new Expense(mExpenseListViewModel.getTripId(), "", cost, type, item_type));
+        mExpenseListViewModel.addExpense(new Expense(mExpenseListViewModel.getTripId(), "", cost, type));
+//        mExpenseListViewModel.addExpense(new Expense(mExpenseListViewModel.getTripId(), "", cost, type, item_type));
+
     }
 
     private void showCalendar(DatePickerDialog.OnDateSetListener tv){

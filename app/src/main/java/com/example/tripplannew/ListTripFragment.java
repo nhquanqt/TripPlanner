@@ -1,15 +1,12 @@
 package com.example.tripplannew;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -19,12 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.tripplannew.adapters.TripArrayAdapter;
-import com.example.tripplannew.data.Trip;
+import com.example.tripplannew.data.webservice.Trip;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 import com.example.tripplannew.viewmodels.SettingViewModel;
 import com.example.tripplannew.viewmodels.TripInfoViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -83,7 +79,7 @@ public class ListTripFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(mTripArray != null)
                 {
-                    Trip trip = mTripArray.get(position);
+                    com.example.tripplannew.data.webservice.Trip trip = mTripArray.get(position);
                     mExpenseListViewModel.setTripId(trip.getId());
                     mExpenseListViewModel.setTrip(trip);
                     Navigation.findNavController(view).navigate(R.id.action_listTripFragment_to_listExpenseFragment);

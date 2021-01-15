@@ -1,7 +1,6 @@
-package com.example.tripplannew.data;
+package com.example.tripplannew.data.local;
 
 import androidx.annotation.NonNull;
-import androidx.media.AudioAttributesCompat;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;

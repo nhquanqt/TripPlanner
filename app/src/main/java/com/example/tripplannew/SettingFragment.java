@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.Account;
-import com.example.tripplannew.viewmodels.LoginViewModel;
+import com.example.tripplannew.data.webservice.Account;
 import com.example.tripplannew.viewmodels.SettingViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
 
@@ -91,6 +91,7 @@ public class SettingFragment extends Fragment {
 
 
         mEtPlaceOfBirth = getActivity().findViewById(R.id.etPlaceOfBirth);
+//        Log.i("check", mTripListViewModel.getUserId());
         mSettingViewModel.getAccount(mTripListViewModel.getUserId()).observe(
                 getActivity(), account -> {
                     mAccount = account;
@@ -112,11 +113,22 @@ public class SettingFragment extends Fragment {
                 String name = mShowName.getText().toString();
                 String dateOfBirth = mEtDateOfBirth.getText().toString();
                 String placeOfBirth = mEtPlaceOfBirth.getText().toString();
-                mAccount.update(name, dateOfBirth, placeOfBirth);
+//                mAccount.update(name, dateOfBirth, placeOfBirth);
+                Account updatedAccount = new Account(mTripListViewModel.getUserId(), name, dateOfBirth, placeOfBirth);
 
-                mSettingViewModel.updateAccount(mAccount);
-
-                Navigation.findNavController(v).navigate(R.id.action_settingFragment_to_listTripFragment);
+                mSettingViewModel.updateProfile(updatedAccount).observe(getActivity(), status -> {
+                    if(status == null)
+                    {
+                        Toast toast = Toast.makeText(getActivity(), "Lỗi đường truyền", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                    else if(status)
+                    {
+                        Toast toast = Toast.makeText(getActivity(), "Cập nhật thành công", Toast.LENGTH_LONG);
+                        toast.show();
+                        Navigation.findNavController(v).navigate(R.id.action_settingFragment_to_listTripFragment);
+                    }
+                });
             }
         });
     }

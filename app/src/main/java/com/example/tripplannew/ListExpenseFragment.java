@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.tripplannew.adapters.ExpenseArrayAdapter;
-import com.example.tripplannew.data.Expense;
+import com.example.tripplannew.data.webservice.Expense;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 
 import java.util.ArrayList;
@@ -85,7 +85,17 @@ public class ListExpenseFragment extends Fragment {
                 if(mExpenseArray != null)
                 {
                     Expense expense = mExpenseArray.get(position);
-                    mExpenseListViewModel.deleteExpense(expense);
+                    mExpenseListViewModel.deleteExpense(expense).observe(getActivity(), status -> {
+
+                        if (status) {
+                            mExpenseArray.remove(position);
+
+                            ExpenseArrayAdapter adapter = new ExpenseArrayAdapter(getActivity(), mExpenseArray);
+                            mListView.setAdapter(adapter);
+
+                            setTotalCost(adapter);
+                        }
+                    });
                 }
                 return false;
             }

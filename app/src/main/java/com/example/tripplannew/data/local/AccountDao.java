@@ -1,4 +1,4 @@
-package com.example.tripplannew.data;
+package com.example.tripplannew.data.local;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

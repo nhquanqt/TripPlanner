@@ -1,7 +1,6 @@
 package com.example.tripplannew;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.Account;
+import com.example.tripplannew.data.local.Account;
 import com.example.tripplannew.viewmodels.LoginViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -50,18 +49,21 @@ public class SignUpFragment extends Fragment {
         String password = ((TextInputLayout)getActivity().findViewById(R.id.signUpPassword)).getEditText().getText().toString();
         String name = ((TextInputLayout)getActivity().findViewById(R.id.signUpName)).getEditText().getText().toString();
 
-        mViewModel.countAccounts(username).observe(this, nAccounts -> {
-
-            if(nAccounts.equals(0))
+        mViewModel.signup(username, password, name).observe(this, isSucceed -> {
+            if(isSucceed == null)
             {
-                mViewModel.insertAccount(new Account(username, password, name));
+                Toast toast = Toast.makeText(getActivity(), "Lỗi đường truyền", Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else if(isSucceed)
+            {
                 Toast toast = Toast.makeText(getActivity(), "Đăng ký thành công", Toast.LENGTH_LONG);
                 toast.show();
                 Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
             }
             else
             {
-                Toast toast = Toast.makeText(getActivity(), "Tên tài khoản đã tồn tại", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getActivity(), "Đăng ký thất bại", Toast.LENGTH_LONG);
                 toast.show();
             }
         });

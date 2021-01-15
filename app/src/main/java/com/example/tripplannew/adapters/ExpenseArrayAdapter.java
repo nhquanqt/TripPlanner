@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.tripplannew.R;
-import com.example.tripplannew.data.Expense;
+import com.example.tripplannew.data.webservice.Expense;
 
 import java.util.List;
 
@@ -47,9 +47,24 @@ public class ExpenseArrayAdapter extends ArrayAdapter<Expense> {
         TextView type = (view).findViewById(R.id.type);
         Expense expense = ExpenseList.get(position);
 
-        img.setImageResource(expense.getBitMapID());
+        int bitmapId;
+        String typeName;
+        switch (expense.getType()) {
+            case Expense.TYPE_FOOD:
+                bitmapId = R.drawable.food;
+                typeName = "Food";
+                break;
+            case Expense.TYPE_DRINK:
+                bitmapId = R.drawable.drink;
+                typeName = "Drink";
+                break;
+            default:
+                bitmapId = R.drawable.ic_local_cafe_24;
+                typeName = "";
+        }
+        img.setImageResource(bitmapId);
         cost.setText(String.format("%s VND", (int)expense.getCost()));
-        type.setText(String.format("%s", expense.getType()));
+        type.setText(String.format("%s", typeName));
         return view;
         //return super.getView(position, convertView, parent);
     }
