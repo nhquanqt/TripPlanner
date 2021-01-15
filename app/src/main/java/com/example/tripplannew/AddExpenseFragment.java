@@ -1,6 +1,5 @@
 package com.example.tripplannew;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.Expense;
+import com.example.tripplannew.data.local.Expense;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 import com.example.tripplannew.viewmodels.MapViewModel;
 

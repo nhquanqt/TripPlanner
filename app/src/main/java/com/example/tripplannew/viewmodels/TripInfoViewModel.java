@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.tripplannew.data.Trip;
+import com.example.tripplannew.data.local.Trip;
 
 public class TripInfoViewModel extends AndroidViewModel {
 

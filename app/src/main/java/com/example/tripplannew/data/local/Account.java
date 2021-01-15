@@ -1,4 +1,4 @@
-package com.example.tripplannew.data;
+package com.example.tripplannew.data.local;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

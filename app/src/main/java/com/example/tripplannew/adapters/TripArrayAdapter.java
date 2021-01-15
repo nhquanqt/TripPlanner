@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.tripplannew.data.Trip;
+import com.example.tripplannew.data.local.Trip;
 
 import java.util.ArrayList;
 

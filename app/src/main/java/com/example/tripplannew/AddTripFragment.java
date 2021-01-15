@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tripplannew.data.Trip;
+import com.example.tripplannew.data.local.Trip;
 import com.example.tripplannew.viewmodels.MapViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
 

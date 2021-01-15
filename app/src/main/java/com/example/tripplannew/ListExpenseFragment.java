@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.tripplannew.adapters.ExpenseArrayAdapter;
-import com.example.tripplannew.data.Expense;
+import com.example.tripplannew.data.local.Expense;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 
 import java.util.ArrayList;

@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.tripplannew.R;
-import com.example.tripplannew.data.Expense;
+import com.example.tripplannew.data.local.Expense;
 
 import java.util.List;
 

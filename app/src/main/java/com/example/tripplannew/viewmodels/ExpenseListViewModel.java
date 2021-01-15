@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tripplannew.data.Expense;
-import com.example.tripplannew.data.ExpenseRepository;
-import com.example.tripplannew.data.Trip;
+import com.example.tripplannew.data.local.Expense;
+import com.example.tripplannew.data.local.ExpenseRepository;
+import com.example.tripplannew.data.local.Trip;
 
 import java.util.List;
 

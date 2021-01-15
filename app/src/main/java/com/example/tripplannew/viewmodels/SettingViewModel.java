@@ -5,27 +5,26 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tripplannew.data.Account;
-import com.example.tripplannew.data.AccountRepository;
-
-import java.util.List;
+import com.example.tripplannew.data.local.AccountRepository;
 
 public class SettingViewModel extends AndroidViewModel {
 
     private AccountRepository mRepository;
+    private com.example.tripplannew.data.webservice.AccountRepository mWebRepository;
 
     public SettingViewModel(Application application)
     {
         super(application);
         mRepository = new AccountRepository(application);
+        mWebRepository = new com.example.tripplannew.data.webservice.AccountRepository();
     }
 
-    public LiveData<Account> getAccount(String userId)
+    public LiveData<com.example.tripplannew.data.webservice.Account> getAccount(String userId)
     {
-        return mRepository.getAccount(userId);
+        return mWebRepository.getAccountById(userId);
     }
-    public void updateAccount(Account account)
+    public LiveData<Boolean> updateProfile(com.example.tripplannew.data.webservice.Account account)
     {
-        mRepository.update(account);
+        return mWebRepository.updateProfile(account);
     }
 }

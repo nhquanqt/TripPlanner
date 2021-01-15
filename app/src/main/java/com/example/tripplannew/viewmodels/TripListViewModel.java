@@ -6,8 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tripplannew.data.Trip;
-import com.example.tripplannew.data.TripRepository;
+import com.example.tripplannew.data.local.Trip;
+import com.example.tripplannew.data.local.TripRepository;
 
 import java.util.List;
 
@@ -43,6 +43,7 @@ public class TripListViewModel extends AndroidViewModel {
 
     public void setUserId(String userId)
     {
+//        Log.i("check", userId);
         mUserId = userId;
     }
 
