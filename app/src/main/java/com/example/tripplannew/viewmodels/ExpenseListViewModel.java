@@ -35,7 +35,12 @@ public class ExpenseListViewModel extends AndroidViewModel {
         mWebRepository.addExpense(expense);
     }
 
-    public LiveData<List<com.example.tripplannew.data.webservice.Expense>> getAllExpenses()
+    public void updateExpense(Expense expense)
+    {
+        mWebRepository.updateExpense(expense);
+    }
+
+    public LiveData<List<Expense>> getAllExpenses()
     {
         return mWebRepository.getExpensesByTripId(mTripId);
 //        return mRepository.getAllExpenses(mTripId);

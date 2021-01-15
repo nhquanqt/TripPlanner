@@ -52,14 +52,35 @@ public class ExpenseArrayAdapter extends ArrayAdapter<Expense> {
         switch (expense.getType()) {
             case Expense.TYPE_FOOD:
                 bitmapId = R.drawable.food;
-                typeName = "Food";
+                typeName = "Đồ ăn";
                 break;
             case Expense.TYPE_DRINK:
                 bitmapId = R.drawable.drink;
-                typeName = "Drink";
+                typeName = "Đồ uống";
                 break;
+            case Expense.TYPE_MOVE:
+                bitmapId = R.drawable.icon_car;
+                typeName = "Di chuyển";
+                break;
+            case Expense.TYPE_RENT:
+                bitmapId = R.drawable.icon_house;
+                typeName = "Thuê địa điểm";
+                break;
+            case Expense.TYPE_ENTERTAINMENT:
+                bitmapId = R.drawable.icon_entertaintment;
+                typeName = "Hoạt động giải trí";
+                break;
+            case Expense.TYPE_PHONE:
+                bitmapId = R.drawable.icon_phone;
+                typeName = "Điện thoại";
+                break;
+            case Expense.TYPE_OTHER:
+                bitmapId = R.drawable.icon_other;
+                typeName = "Khoản chi khác";
+                break;
+
             default:
-                bitmapId = R.drawable.ic_local_cafe_24;
+                bitmapId = R.drawable.icon_other;
                 typeName = "";
         }
         img.setImageResource(bitmapId);

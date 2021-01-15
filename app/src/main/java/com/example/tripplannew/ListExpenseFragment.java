@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.example.tripplannew.adapters.ExpenseArrayAdapter;
 import com.example.tripplannew.data.webservice.Expense;
+import com.example.tripplannew.viewmodels.ExpenseInfoViewModel;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ListExpenseFragment extends Fragment {
     private Button mBtnAddExpense;
     private Button mBtnBackToTrips;
     private TextView mTvTripName;
+    private ExpenseInfoViewModel mExpenseInfoViewModel;
     private ArrayList<Expense> mExpenseArray;
 
 
@@ -38,7 +40,7 @@ public class ListExpenseFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mExpenseListViewModel = new ViewModelProvider(getActivity()).get(ExpenseListViewModel.class);
-
+        mExpenseInfoViewModel = new ViewModelProvider(getActivity()).get(ExpenseInfoViewModel.class);
         return inflater.inflate(R.layout.fragment_list_expense, container, false);
     }
 
@@ -85,17 +87,8 @@ public class ListExpenseFragment extends Fragment {
                 if(mExpenseArray != null)
                 {
                     Expense expense = mExpenseArray.get(position);
-                    mExpenseListViewModel.deleteExpense(expense).observe(getActivity(), status -> {
-
-                        if (status) {
-                            mExpenseArray.remove(position);
-
-                            ExpenseArrayAdapter adapter = new ExpenseArrayAdapter(getActivity(), mExpenseArray);
-                            mListView.setAdapter(adapter);
-
-                            setTotalCost(adapter);
-                        }
-                    });
+                    mExpenseInfoViewModel.setExpense(expense);
+                    Navigation.findNavController(view).navigate(R.id.action_listExpenseFragment_to_infoExpenseFragment);
                 }
                 return false;
             }

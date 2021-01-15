@@ -21,6 +21,9 @@
             app:destination="@id/listTripFragment"
             app:popUpTo="@id/listTripFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_listExpenseFragment_to_infoExpenseFragment"
+            app:destination="@id/infoExpenseFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTripFragment"
@@ -161,5 +164,13 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/infoExpenseFragment"
+        android:name="com.example.tripplannew.InfoExpenseFragment"
+        android:label="InfoExpenseFragment" >
+        <action
+            android:id="@+id/action_infoExpenseFragment_to_listExpenseFragment"
+            app:destination="@id/listExpenseFragment" />
     </fragment>
 </navigation>
