@@ -71,43 +71,64 @@
                 android:textColor="@color/While"
                 android:textSize="18dp" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/incomes"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_alignParentLeft="true"-->
-<!--                android:layout_marginLeft="300dp"-->
-<!--                android:layout_marginTop="83dp"-->
-<!--                android:gravity="bottom"-->
-<!--                android:text="@string/incomes"-->
-<!--                android:textAppearance="@style/incomes" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="83dp"
-                android:text="Tổng tiền"
-                android:textAlignment="center"
-                android:textColor="@color/While"
-                android:textSize="17dp" />
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="80dp"
+                android:gravity="bottom"
+                android:text="Ngân sách"
+                android:textAppearance="@style/incomes"
+                android:alpha="0.7"/>
+            <TextView
+                android:id="@+id/expenses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="150dp"
+                android:text="Tổng chi tiêu"
+                android:textAppearance="@style/incomes"
+                android:alpha="0.7"
+                />
+            <TextView
+                android:id="@+id/trip_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="100dp"
+                android:text="0 VND"
+                android:textAppearance="@style/some_id"
+                />
 
             <TextView
                 android:id="@+id/total_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="105dp"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="170dp"
                 android:text="0 VND"
-                android:textAlignment="center"
-                android:textColor="@color/Red"
-                android:textSize="30dp" />
+                android:textAppearance="@style/some_id"
+                />
+            <RelativeLayout
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/bieudo"
+                >
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="345dp"
@@ -117,7 +138,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="168dp"
+                android:layout_marginTop="220dp"
                 android:background="@drawable/layout_bg">
 
                 <ListView

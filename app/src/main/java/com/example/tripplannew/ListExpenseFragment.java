@@ -53,6 +53,9 @@ public class ListExpenseFragment extends Fragment {
         mTvTripName = getActivity().findViewById(R.id.tvTripName);
         mTvTripName.setText(mExpenseListViewModel.getTrip().getTripName());
 
+        TextView trip_budget = (TextView)getActivity().findViewById(R.id.trip_budget);
+        trip_budget.setText(String.format("%s VND", String.valueOf((int)mExpenseListViewModel.getTripBudget())));
+
         mExpenseListViewModel.getAllExpenses().observe(getActivity(), expenses -> {
             Activity activity = getActivity();
             if(activity != null)
@@ -60,6 +63,7 @@ public class ListExpenseFragment extends Fragment {
                 mExpenseArray = new ArrayList<>(expenses);
                 ExpenseArrayAdapter adapter = new ExpenseArrayAdapter(getActivity(), mExpenseArray);
                 mListView.setAdapter(adapter);
+
 
                 setTotalCost(adapter);
             }

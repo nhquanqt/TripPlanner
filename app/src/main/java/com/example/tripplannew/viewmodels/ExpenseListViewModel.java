@@ -16,6 +16,7 @@ public class ExpenseListViewModel extends AndroidViewModel {
     private ExpenseRepository mRepository;
     private com.example.tripplannew.data.webservice.ExpenseRepository mWebRepository;
     private String mTripId;
+    private float mTripBudget;
     private Trip mTrip;
 
     public ExpenseListViewModel(Application application)
@@ -62,10 +63,20 @@ public class ExpenseListViewModel extends AndroidViewModel {
         return mTripId;
     }
 
+
+
     public void setTrip(Trip trip)
     {
         mTrip = trip;
     }
 
     public Trip getTrip() { return mTrip; }
+
+    public float getTripBudget() {
+        return mTripBudget;
+    }
+
+    public void setTripBudget(float mTripBudget) {
+        this.mTripBudget = mTripBudget;
+    }
 }
