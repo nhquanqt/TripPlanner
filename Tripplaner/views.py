@@ -145,9 +145,20 @@ def addTrip(request):
     return JsonResponse(obj)
     pass
 
+@csrf_exempt
+def deleteTripByID(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
 
-def getExpenseTrip(request):
-    id = request.GET['id']
+    id = body['id']
+    Trip.objects.filter(idTrip=id).delete()    
+    obj = {"result": True}
+    return JsonResponse(obj)
+    pass
+
+
+def getExpensebyIDTrip(request):
+    id = request.GET['idTrip']
     result = []
     expense = Expense.objects.all()
     for exi in expense:
@@ -187,6 +198,7 @@ def updateExpense(request):
 
 @csrf_exempt
 def addExpense(request):
+
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
 
@@ -202,6 +214,17 @@ def addExpense(request):
     idTrip = Trip.objects.get(idTrip=idt)
     ID = str(int(ID) + 1)
     Expense.objects.create(idExpense= ID, idTrip = idTrip, expenseName=name, cost=cost, typeExpense=typ)
+    obj = {"result": True}
+    return JsonResponse(obj)
+    pass
+
+@csrf_exempt
+def deleteExpenseByID(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    id = body['id']
+    Expense.objects.filter(idExpense=id).delete()    
     obj = {"result": True}
     return JsonResponse(obj)
     pass

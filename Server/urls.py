@@ -55,6 +55,11 @@ urlpatterns = [
     # "endDate": "13", 
     # "departure": "HCM1"
     # }
+    path('trip/delete', views.deleteTripByID),
+    #http://192.168.1.3:8080/trip/delete
+    # {
+    # "id": "3"
+    # }
     path('updateexpense', views.updateExpense),
     #http://192.168.1.3:8080/updateexpense
     # {
@@ -72,7 +77,11 @@ urlpatterns = [
     # "cost": 300000.0, 
     # "type": 3
     # }
-
+    path('expense/delete', views.deleteExpenseByID),
+    #http://192.168.1.3:8080/expense/delete
+    # {
+    # "id": "3"
+    # }
     url(r'^login', views.Login),
     #http://192.168.1.3:8080/login?u=fit18&p=fit18
     url(r'^user', views.getUserByID),
@@ -81,8 +90,8 @@ urlpatterns = [
     #http://192.168.1.3:8080/trip?id=1
     url(r'^gettripbyID', views.getTripByID),
     #http://192.168.1.3:8080/gettripbyID?id=1
-    url(r'^expense', views.getExpenseTrip),
-    #http://192.168.1.3:8080/expense?id=1
+    url(r'^expenses', views.getExpensebyIDTrip),
+    #http://192.168.1.3:8080/expenses?idTrip=1
     url(r'^getexpensebyID', views.getExpensebyID)
     #http://192.168.1.3:8080/getexpensebyID?id=1
     
