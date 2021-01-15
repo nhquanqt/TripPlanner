@@ -62,6 +62,8 @@ class Expense(models.Model):
     expenseName = models.CharField(max_length=255)
     cost = models.FloatField(blank=True, null=True)
     typeExpense = models.IntegerField(blank=True, null=True)
+    date = models.CharField(max_length=255, null=True)
+    place = models.CharField(max_length=255,null=True)
 
     def getIDExpense(self):
         return self.idExpense
@@ -77,6 +79,12 @@ class Expense(models.Model):
         pass
     def getTypeExpense(self):
         return self.typeExpense
+        pass
+    def getDate(self):
+        return self.date
+        pass
+    def getPlace(self):
+        return self.place
         pass
 
 class Share(models.Model):

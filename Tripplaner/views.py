@@ -164,7 +164,7 @@ def getExpensebyIDTrip(request):
     for exi in expense:
         idTrip =  exi.getIDTrip()
         if id == idTrip.idTrip:
-            obj = {"id": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "type": exi.getTypeExpense()}        
+            obj = {"id": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "type": exi.getTypeExpense(), "date": exi.getDate(), "place": exi.getPlace()}        
             result.append(obj)
     res = {"result": result}
     return JsonResponse(res)
@@ -177,7 +177,7 @@ def getExpensebyID(request):
     for exi in expense:
         idExpense = exi.getIDExpense()
         if id == idExpense:
-            obj = {"id": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "type": exi.getTypeExpense()}        
+            obj = {"id": exi.getIDExpense(), "expenseName": exi.getExpenseName(), "cost": exi.getCost(), "type": exi.getTypeExpense(), "date": exi.getDate(), "place": exi.getPlace()}        
             result.append(obj)
     res = {"result": result}
     return JsonResponse(res)
@@ -187,12 +187,14 @@ def getExpensebyID(request):
 def updateExpense(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
-
+    print(body)
     id = body['id']
     name = body['expenseName']
     cost = body['cost']
     typ = body['type']
-    Expense.objects.filter(idTrip=id).update(expenseName=name, cost=cost, typeExpense=typ)
+    date = body['date']
+    place = body['place']
+    Expense.objects.filter(idExpense=id).update(expenseName=name, cost=cost, typeExpense=typ, date=date, place=place)
     obj = {"result": True}
     return JsonResponse(obj)
 
@@ -206,6 +208,8 @@ def addExpense(request):
     name = body['expenseName']
     cost = body['cost']
     typ = body['type']
+    date = body['date']
+    place = body['place']
 
     ID = 0    
     ex = Expense.objects.all()
@@ -213,7 +217,7 @@ def addExpense(request):
         ID = max(int(ID),int(exi.getIDExpense())) 
     idTrip = Trip.objects.get(idTrip=idt)
     ID = str(int(ID) + 1)
-    Expense.objects.create(idExpense= ID, idTrip = idTrip, expenseName=name, cost=cost, typeExpense=typ)
+    Expense.objects.create(idExpense= ID, idTrip = idTrip, expenseName=name, cost=cost, typeExpense=typ, date=date, place=place)
     obj = {"result": True}
     return JsonResponse(obj)
     pass
