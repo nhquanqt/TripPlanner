@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ECEFF1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="705dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/While">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="48dp"
+                android:layout_centerHorizontal="true"
+                android:text="Công cụ"
+                android:textAppearance="@style/expense" />
+
+            <TextView
+                android:id="@+id/btnBack_tools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="48dp"
+                android:background="@color/While"
+                android:onClick="back_item"
+                android:text="Trở về"
+                android:textAppearance="@style/done" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_findATM"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="150dp"
+            android:background="@color/While"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="13.5dp"
+                android:text="Tìm ATM"
+                android:textAppearance="@style/type"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_findRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="202dp"
+            android:background="@color/While"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="13.5dp"
+                android:text="Tìm nhà hàng"
+                android:textAppearance="@style/type"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

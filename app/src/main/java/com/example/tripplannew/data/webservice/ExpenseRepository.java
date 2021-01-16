@@ -86,4 +86,26 @@ public class ExpenseRepository {
 
         return data;
     }
+    public LiveData<Boolean> updateExpense(Expense expense)
+    {
+        final MutableLiveData<Boolean> data = new MutableLiveData<>();
+
+        mExpenseService.updateExpenseInfo(expense)
+                .enqueue(new Callback<Result<Boolean>>() {
+                    @Override
+                    public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                        if(response.body() != null)
+                        {
+                            data.setValue(response.body().getResult());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
+
+        return data;
+    }
 }

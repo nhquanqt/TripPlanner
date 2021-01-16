@@ -20,54 +20,88 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.tripplannew.data.webservice.Expense;
+import com.example.tripplannew.viewmodels.ExpenseInfoViewModel;
 import com.example.tripplannew.viewmodels.ExpenseListViewModel;
 import com.example.tripplannew.viewmodels.MapViewModel;
 
 import java.util.Calendar;
 
-public class AddExpenseFragment extends Fragment {
+public class InfoExpenseFragment extends Fragment {
 
     private ExpenseListViewModel mExpenseListViewModel;
+    private ExpenseInfoViewModel mExpenseInfoViewModel;
     private MapViewModel mMapViewModel;
 
+    private EditText mEtCost;
+    private Spinner mStype;
     private Button mBtnSubmitExpense;
-    private Button mBtnCancelExpense;
+    private Button mBtnBack;
     private Button mBtnPlace;
     private Button mBtnDate;
+    private Button mBtnDelete;
+
+    private Expense mExpense;
+
     private DatePickerDialog.OnDateSetListener mOnDateSetListener;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i("check", "onCreateView");
         super.onCreateView(inflater, container, savedInstanceState);
 
         mExpenseListViewModel = new ViewModelProvider(getActivity()).get(ExpenseListViewModel.class);
         mMapViewModel = new ViewModelProvider(getActivity()).get(MapViewModel.class);
+        mExpenseInfoViewModel = new ViewModelProvider(getActivity()).get(ExpenseInfoViewModel.class);
 
-        return inflater.inflate(R.layout.fragment_add_expense, container, false);
+        return inflater.inflate(R.layout.fragment_info_expense, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.i("check", "onActivityCreated");
         super.onActivityCreated(savedInstanceState);
 
+        mEtCost = getActivity().findViewById(R.id.item_cost);
+        mStype = getActivity().findViewById(R.id.item_type);
+        mBtnDate = getActivity().findViewById(R.id.item_date);
+        mBtnPlace = getActivity().findViewById(R.id.item_place);
+
         mBtnSubmitExpense = getActivity().findViewById(R.id.btnExpenseSubmit);
+        mBtnBack = getActivity().findViewById(R.id.btnBack);
+        mBtnDelete = getActivity().findViewById(R.id.btnDelete);
+
+        mExpenseInfoViewModel.getExpense().observe(getActivity(),expense -> {
+            mExpense = expense;
+            mEtCost.setText(String.valueOf((int)expense.getCost()));
+            mStype.setSelection(expense.getType());
+            mBtnDate.setText(expense.getDate());
+            mBtnPlace.setText(expense.getPlace());
+        });
         mBtnSubmitExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addExpense(v);
+                updateExpense(v);
+            }
+        });
+        mBtnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mExpenseListViewModel.deleteExpense(mExpense).observe(getActivity(), status -> {
+                    Navigation.findNavController(view).navigate(R.id.action_infoExpenseFragment_to_listExpenseFragment);
+                });
             }
         });
 
-        mBtnCancelExpense = getActivity().findViewById(R.id.btnExpenseCancel);
-        mBtnCancelExpense.setOnClickListener(new View.OnClickListener() {
+
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_addExpenseFragment_to_listExpenseFragment);
+                Navigation.findNavController(v).navigate(R.id.action_infoExpenseFragment_to_listExpenseFragment);
             }
         });
 
-        mBtnPlace = getActivity().findViewById(R.id.item_place);
+
         mBtnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +110,9 @@ public class AddExpenseFragment extends Fragment {
             }
         });
 
-        mBtnDate = getActivity().findViewById(R.id.item_date);
+
+
+
         mBtnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,25 +135,24 @@ public class AddExpenseFragment extends Fragment {
                 mBtnPlace.setText(location);
             }
         });
+
     }
 
-    private void addExpense(View v)
+    private void updateExpense(View v)
     {
         int cost = 0;
         int type = ((Spinner)getActivity().findViewById(R.id.item_type)).getSelectedItemPosition();
-
         if ((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())).length() != 0)
             cost = Integer.parseInt((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())));
-
         String date = ((Button)getActivity().findViewById(R.id.item_date)).getText().toString();
         String place = ((Button)getActivity().findViewById(R.id.item_place)).getText().toString();
-        Log.i("check", date);
-        Expense expense = new Expense(mExpenseListViewModel.getTripId(), "", cost, type, date, place);
-        mExpenseListViewModel.addExpense(expense).observe(getActivity(), status -> {
-            Navigation.findNavController(v).navigate(R.id.action_addExpenseFragment_to_listExpenseFragment);
+        mExpense.update("", cost, type, date,place);
+        mExpenseListViewModel.updateExpense(mExpense).observe(getActivity(), status -> {
+            Navigation.findNavController(v).navigate(R.id.action_infoExpenseFragment_to_listExpenseFragment);
         });
-    }
+//        mExpenseListViewModel.addExpense(new Expense(mExpenseListViewModel.getTripId(), "", cost, type, item_type));
 
+    }
 
     private void showCalendar(DatePickerDialog.OnDateSetListener tv){
         Calendar cal = Calendar.getInstance();

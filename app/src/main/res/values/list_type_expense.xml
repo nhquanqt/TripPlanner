@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="list_type_expense">
-        <item>"Food"</item>
-        <item>"Drink</item>
+        <item>"Đồ ăn"</item>
+        <item>"Đồ uống"</item>
+        <item>"Di chuyển"</item>
+        <item>"Thuê địa điểm"</item>
+        <item>"Hoạt động giải trí"</item>
+        <item>"Điện thoại"</item>
+        <item>"Khoản chi khác"</item>
     </string-array>
     \</resources>

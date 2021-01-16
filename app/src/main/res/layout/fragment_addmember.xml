@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="44dp"
+            android:textAlignment="center"
+            android:text="Chuyến đi mới"
+            android:textAppearance="@style/expense"
+            android:gravity="center_horizontal" />
+
+
+
+        <Button
+            android:id="@+id/btnTripSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="8dp"
+            android:text="Xong"
+            android:textAppearance="@style/done"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/separator" />
+
+        <TextView
+            android:id="@+id/txHoten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+
+
+            android:layout_marginTop="92dp"
+
+            android:background="@drawable/layout_bg1"
+            android:backgroundTint="@color/Red"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+
+            android:text="Danh sách thành viên"
+            android:textAlignment="center"
+            android:textAppearance="@style/type"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/parentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="335dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddMember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:text="ADD MEMBER">
+
+    </Button>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
