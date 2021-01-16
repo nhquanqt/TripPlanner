@@ -90,7 +90,7 @@ public class ListExpenseFragment extends Fragment {
                     TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
                     total.setTextColor(R.color.red123);
                     mPieChart.addPieSlice(new PieModel(
-                            "Qúa ngân sách",
+                            "Quá ngân sách",
                             100,
                             Color.parseColor("#FF0000")));
 

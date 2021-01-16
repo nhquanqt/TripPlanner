@@ -59,11 +59,21 @@ public class LoginFragment extends Fragment {
         String username = ((TextInputLayout)getActivity().findViewById(R.id.loginUsername)).getEditText().getText().toString();
         String password = ((TextInputLayout)getActivity().findViewById(R.id.loginPassword)).getEditText().getText().toString();
 
+        if (username.equals("")){
+            Toast toast = Toast.makeText(getActivity(), "Bạn cần nhập tên tài khoản", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
+        if (password.equals("")){
+            Toast toast = Toast.makeText(getActivity(), "Bạn cần nhập mật khẩu", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
         mLoginViewModel.login(username, password).observe(this, account -> {
             if(account != null)
             {
                 mTripListViewModel.setUserId(account.getId());
-
+                mTripListViewModel.setUserName(account.getUsername());
                 Toast toast = Toast.makeText(getActivity(), "Đăng nhập thành công", Toast.LENGTH_LONG);
                 toast.show();
 

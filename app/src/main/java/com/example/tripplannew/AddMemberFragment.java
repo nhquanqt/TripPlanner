@@ -61,12 +61,12 @@ public class AddMemberFragment extends Fragment {
         btnTripSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), mTripListViewModel.getUserId()));
+                mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), mTripListViewModel.getUserId(),mTripListViewModel.getUserName()));
 
 
                 for(int i = 0; i < allEds.size(); i++)
                 {
-                    mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), allEds.get(i).getText().toString()));
+                    mShareViewModel.addShare(new Share(mShareViewModel.getTripId(),"" ,allEds.get(i).getText().toString()));
                 }
 
 
@@ -83,7 +83,7 @@ public class AddMemberFragment extends Fragment {
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params.setMargins(0,10,0,10);
         EditText edittTxt = new EditText(getContext());
-        int maxLength = 5;
+        int maxLength = 20;
         hint++;
         edittTxt.setHint("Username"+hint);
         edittTxt.setLayoutParams(params);
