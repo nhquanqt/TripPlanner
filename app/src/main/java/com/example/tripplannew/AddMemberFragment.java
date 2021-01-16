@@ -49,6 +49,7 @@ public class AddMemberFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         buttonView = (Button) getActivity().findViewById(R.id.btnAddMember);
         parentLayout = (LinearLayout)getActivity().findViewById(R.id.parentLayout);
+        allEds= new ArrayList<EditText>();//luu mang editText
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,15 +63,19 @@ public class AddMemberFragment extends Fragment {
             public void onClick(View view) {
                 mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), mTripListViewModel.getUserId()));
 
-                //Man sua roi for chay vo day hi
-                mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), allEds.get(0).getText().toString()));
-                //......
+
+                for(int i = 0; i < allEds.size(); i++)
+                {
+                    mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), allEds.get(i).getText().toString()));
+                }
+
+
                 Navigation.findNavController(view).navigate(R.id.action_addMemberFragment_to_listTripFragment);
             }
         });
     }
     protected void createEditTextView() {
-        allEds= new ArrayList<EditText>();//luu mang editText
+
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
                 RelativeLayout.LayoutParams.MATCH_PARENT,

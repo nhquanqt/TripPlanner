@@ -193,7 +193,9 @@
         tools:layout="@layout/fragment_addmember">
         <action
             android:id="@+id/action_addMemberFragment_to_listTripFragment"
-            app:destination="@id/listTripFragment" />
+            app:destination="@id/listTripFragment"
+            app:popUpTo="@id/listTripFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/pieChartFragment"
