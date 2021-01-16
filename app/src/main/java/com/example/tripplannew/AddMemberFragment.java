@@ -3,6 +3,7 @@ package com.example.tripplannew;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +16,31 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+
+import com.example.tripplannew.data.webservice.Share;
+import com.example.tripplannew.viewmodels.ShareViewModel;
+import com.example.tripplannew.viewmodels.TripListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddMemberFragment extends Fragment {
     private Button buttonView;
-    private Button btnbtnTripSubmit;
+    private Button btnTripSubmit;
     private LinearLayout parentLayout;
     private int hint=0;
+    private ShareViewModel mShareViewModel;
+    private TripListViewModel mTripListViewModel;
     List<EditText> allEds;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        mShareViewModel = new ViewModelProvider(getActivity()).get(ShareViewModel.class);
+        mTripListViewModel = new ViewModelProvider(getActivity()).get(TripListViewModel.class);
+
         return inflater.inflate(R.layout.fragment_addmember,container,false);
     }
 
@@ -38,6 +49,7 @@ public class AddMemberFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         buttonView = (Button) getActivity().findViewById(R.id.btnAddMember);
         parentLayout = (LinearLayout)getActivity().findViewById(R.id.parentLayout);
+        allEds= new ArrayList<EditText>();//luu mang editText
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,16 +57,25 @@ public class AddMemberFragment extends Fragment {
                 createEditTextView();
             }
         });
-        btnbtnTripSubmit =(Button)getActivity().findViewById(R.id.btnTripSubmit);
-        btnbtnTripSubmit.setOnClickListener(new View.OnClickListener() {
+        btnTripSubmit =(Button)getActivity().findViewById(R.id.btnTripSubmit);
+        btnTripSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), mTripListViewModel.getUserId()));
+
+
+                for(int i = 0; i < allEds.size(); i++)
+                {
+                    mShareViewModel.addShare(new Share(mShareViewModel.getTripId(), allEds.get(i).getText().toString()));
+                }
+
+
                 Navigation.findNavController(view).navigate(R.id.action_addMemberFragment_to_listTripFragment);
             }
         });
     }
     protected void createEditTextView() {
-        allEds= new ArrayList<EditText>();//luu mang editText
+
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
                 RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -75,5 +96,6 @@ public class AddMemberFragment extends Fragment {
         edittTxt.setFilters(fArray);
         allEds.add(edittTxt);
         parentLayout.addView(edittTxt);
+
     }
 }

@@ -44,9 +44,4 @@ public class MapViewModel extends AndroidViewModel {
     {
         return mBackActionId;
     }
-
-    public LiveData<List<Place>> getNearbyPlaces(double lat, double lon, String tag, int radius)
-    {
-        return mGeoLocationRepository.getNearbyPlaces(lat, lon, tag, radius);
-    }
 }
