@@ -29,7 +29,7 @@ public class AddTripFragment extends Fragment {
     private TripListViewModel mTripListViewModel;
     private MapViewModel mMapViewModel;
 
-    private Button mBtnSubmitTrip, mBtnCancelTrip;
+    private Button mBtnNext, mBtnCancelTrip;
     private TextView mTvStartDate, mTvEndDate, mTvDeparture;
 
     private DatePickerDialog.OnDateSetListener tvStartSetListener, tvEndSetListener;
@@ -50,8 +50,8 @@ public class AddTripFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mBtnSubmitTrip = getActivity().findViewById(R.id.btnTripSubmit);
-        mBtnSubmitTrip.setOnClickListener(new View.OnClickListener() {
+        mBtnNext = getActivity().findViewById(R.id.btnNext);
+        mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addTrip(v);
@@ -129,7 +129,7 @@ public class AddTripFragment extends Fragment {
         float budget = Float.parseFloat(stringBudget);
 //        mTripListViewModel.insert(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure));
         mTripListViewModel.addTrip(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure)).observe(getActivity(), status -> {
-            Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_listTripFragment);
+            Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_addMemberFragment);
         });
     }
 

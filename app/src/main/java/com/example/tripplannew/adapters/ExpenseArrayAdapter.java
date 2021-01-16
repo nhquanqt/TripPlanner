@@ -38,6 +38,9 @@ public class ExpenseArrayAdapter extends ArrayAdapter<Expense> {
                 cost += ExpenseList.get(i).getCost();
         return cost;
     }
+
+
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {

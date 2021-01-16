@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.squareup.moshi:moshi:1.11.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

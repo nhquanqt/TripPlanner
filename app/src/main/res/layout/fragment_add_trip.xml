@@ -35,7 +35,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
         <Button
-            android:id="@+id/btnTripSubmit"
+            android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -43,7 +43,7 @@
             android:layout_gravity="right"
             android:layout_marginTop="32dp"
             android:layout_marginRight="8dp"
-            android:text="Xong"
+            android:text="Tiếp"
             android:textAppearance="@style/done"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
@@ -79,22 +79,22 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#D3D3D3" />
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Tên chuyến đi"-->
-<!--            android:id="@+id/etTrip"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_marginTop="150dp"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/custom_edit_text"-->
-<!--                />-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:hint="Tên chuyến đi"-->
+        <!--            android:id="@+id/etTrip"-->
+        <!--            android:layout_alignParentLeft="true"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="150dp"-->
+        <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
+        <!--            <com.google.android.material.textfield.TextInputEditText-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:background="@drawable/custom_edit_text"-->
+        <!--                />-->
+        <!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <TextView
             android:id="@+id/tvBudget"
@@ -121,17 +121,17 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#D3D3D3" />
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginLeft="17.5dp"-->
-<!--            android:layout_marginTop="300dp"-->
-<!--            android:alpha="0.3"-->
-<!--            android:gravity="top"-->
-<!--            android:text="Settings"-->
-<!--            android:textAppearance="@style/settings" />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentLeft="true"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:layout_marginLeft="17.5dp"-->
+        <!--            android:layout_marginTop="300dp"-->
+        <!--            android:alpha="0.3"-->
+        <!--            android:gravity="top"-->
+        <!--            android:text="Settings"-->
+        <!--            android:textAppearance="@style/settings" />-->
 
         <ImageView
             android:layout_width="wrap_content"
@@ -249,70 +249,70 @@
             android:background="@drawable/separator" />
     </RelativeLayout>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical">-->
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Tên chuyến đi"-->
-<!--            android:id="@+id/etTrip"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                />-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="Tên chuyến đi"-->
+    <!--            android:id="@+id/etTrip"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                />-->
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Ngân sách"-->
-<!--            android:id="@+id/etBudget"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="number"-->
-<!--                />-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="Ngân sách"-->
+    <!--            android:id="@+id/etBudget"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:inputType="number"-->
+    <!--                />-->
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Ngày bắt đầu"-->
-<!--            android:id="@+id/etStartDate"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="date" />-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="Ngày bắt đầu"-->
+    <!--            android:id="@+id/etStartDate"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:inputType="date" />-->
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Ngày kết thúc"-->
-<!--            android:id="@+id/etEndDate"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="date" />-->
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="Ngày kết thúc"-->
+    <!--            android:id="@+id/etEndDate"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:inputType="date" />-->
 
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/btnTripSubmit"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|center"-->
-<!--        android:layout_margin="16dp"-->
-<!--        app:srcCompat="@drawable/ic_plus_24"-->
-<!--        tools:ignore="VectorDrawableCompat" />-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/btnTripSubmit"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom|center"-->
+    <!--        android:layout_margin="16dp"-->
+    <!--        app:srcCompat="@drawable/ic_plus_24"-->
+    <!--        tools:ignore="VectorDrawableCompat" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
