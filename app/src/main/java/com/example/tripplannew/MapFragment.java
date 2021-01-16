@@ -3,6 +3,7 @@ package com.example.tripplannew;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.tripplannew.data.webservice.Place;
 import com.example.tripplannew.viewmodels.MapViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -84,8 +88,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     Address address = addressList.get(0);
                     address_location = address.getAddressLine(0);
                     LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+                    mMap.clear();
                     mMap.addMarker(new MarkerOptions().position(latLng).title(location));
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+//                    mMap.addCircle(new CircleOptions().center(latLng).radius(1000));
+//                    mMapViewModel.getNearbyPlaces(latLng.latitude, latLng.longitude, "atm", 1000).observe(getActivity(), placeList -> {
+//
+//                        for(int i = 0; i < placeList.size(); ++i)
+//                        {
+//                            Place place = placeList.get(i);
+//                            LatLng placeLatLng = new LatLng(place.getLat(), place.getLon());
+//                            mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
+//                        }
+//                    });
                 }
                 return false;
             }
