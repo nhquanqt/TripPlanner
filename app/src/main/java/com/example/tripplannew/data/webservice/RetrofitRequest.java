@@ -15,7 +15,8 @@ public class RetrofitRequest {
             Moshi moshi = new Moshi.Builder().build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.104:8080")
+//                    .baseUrl("http://192.168.1.17:8080")
+                    .baseUrl("https://trip-planner-hcmus.herokuapp.com/")
                     .addConverterFactory(MoshiConverterFactory.create(moshi))
                     .build();
         }

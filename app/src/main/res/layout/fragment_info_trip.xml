@@ -169,11 +169,12 @@
 
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon" />
 
-        <Button
+        <EditText
             android:id="@+id/tvDeparture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn vị trí "
+            android:hint="Điền địa điểm"
+            android:textColorHint="@color/blue"
             android:textAppearance="@style/done"
             android:textSize="16sp"
             app:icon="@drawable/vector"

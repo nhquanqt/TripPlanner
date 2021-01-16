@@ -32,7 +32,6 @@ public class AddExpenseFragment extends Fragment {
 
     private Button mBtnSubmitExpense;
     private Button mBtnCancelExpense;
-    private Button mBtnPlace;
     private Button mBtnDate;
     private DatePickerDialog.OnDateSetListener mOnDateSetListener;
 
@@ -67,15 +66,6 @@ public class AddExpenseFragment extends Fragment {
             }
         });
 
-        mBtnPlace = getActivity().findViewById(R.id.item_place);
-        mBtnPlace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMapViewModel.setBackActionId(R.id.action_mapFragment_to_addExpenseFragment);
-                Navigation.findNavController(v).navigate(R.id.action_addExpenseFragment_to_mapFragment);
-            }
-        });
-
         mBtnDate = getActivity().findViewById(R.id.item_date);
         mBtnDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,13 +82,6 @@ public class AddExpenseFragment extends Fragment {
                 mBtnDate.setText(date);
             }
         };
-
-        mMapViewModel.getLocation().observe(getActivity(), location -> {
-            if(location != null && location.length() > 0)
-            {
-                mBtnPlace.setText(location);
-            }
-        });
     }
 
     private void addExpense(View v)
@@ -110,7 +93,7 @@ public class AddExpenseFragment extends Fragment {
             cost = Integer.parseInt((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())));
 
         String date = ((Button)getActivity().findViewById(R.id.item_date)).getText().toString();
-        String place = ((Button)getActivity().findViewById(R.id.item_place)).getText().toString();
+        String place = ((EditText)getActivity().findViewById(R.id.item_place)).getText().toString();
         Log.i("check", date);
         Expense expense = new Expense(mExpenseListViewModel.getTripId(), "", cost, type, date, place);
         mExpenseListViewModel.addExpense(expense).observe(getActivity(), status -> {
