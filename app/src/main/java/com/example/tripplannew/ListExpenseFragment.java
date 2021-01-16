@@ -1,5 +1,6 @@
 package com.example.tripplannew;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class ListExpenseFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_list_expense, container, false);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -84,16 +86,30 @@ public class ListExpenseFragment extends Fragment {
                 mListView.setAdapter(adapter);
                 setTotalCost(adapter);
                 int totalCost = (int)mExpenseListViewModel.getTotalCost();
-                mPieChart.addPieSlice(
-                        new PieModel(
-                                "Ngân sách",
-                                budget - totalCost,
-                                Color.parseColor("#FFFFFF")));
-                mPieChart.addPieSlice(
-                        new PieModel(
-                                "Chi tiêu",
-                                totalCost,
-                                Color.parseColor("#DC7633")));
+                if(totalCost>budget){
+                    TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
+                    total.setTextColor(R.color.red123);
+                    mPieChart.addPieSlice(new PieModel(
+                            "Qúa ngân sách",
+                            100,
+                            Color.parseColor("#FF0000")));
+
+                }
+                else {
+                    mPieChart.addPieSlice(
+                            new PieModel(
+                                    "Chi tiêu",
+                                    totalCost,
+                                    Color.parseColor("#66FF33")));
+                    mPieChart.addPieSlice(
+                            new PieModel(
+                                    "Ngân sách",
+                                    budget - totalCost,
+                                    Color.parseColor("#FFFFFF")));
+
+
+                }
+
 
                 mPieChart.startAnimation();
             }
