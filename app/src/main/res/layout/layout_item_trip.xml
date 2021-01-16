@@ -20,6 +20,7 @@
             android:layout_marginTop="11dp"
             android:layout_marginRight="156dp"
             android:src="@drawable/trip" />
+
         <TextView
             android:id="@+id/tvBudget"
             android:layout_width="wrap_content"
@@ -27,10 +28,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="15dp"
             android:gravity="center"
             android:text="Budget"
-            android:textSize="14sp"
             android:textAppearance="@style/cost_20" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_marginLeft="64dp"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="Name"
+            android:text="NAME"
             android:textAppearance="@style/type" />
 
         <ImageView

@@ -21,6 +21,12 @@
             app:destination="@id/listTripFragment"
             app:popUpTo="@id/listTripFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_listExpenseFragment_to_infoExpenseFragment"
+            app:destination="@id/infoExpenseFragment" />
+        <action
+            android:id="@+id/action_listExpenseFragment_to_pieChartFragment"
+            app:destination="@id/pieChartFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTripFragment"
@@ -39,6 +45,9 @@
         <action
             android:id="@+id/action_addTripFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_addTripFragment_to_addMemberFragment"
+            app:destination="@id/addMemberFragment" />
     </fragment>
     <fragment
         android:id="@+id/listTripFragment"
@@ -161,5 +170,36 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_settingFragment_to_infoUserFragment"
+            app:destination="@id/infoUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoExpenseFragment"
+        android:name="com.example.tripplannew.InfoExpenseFragment"
+        android:label="InfoExpenseFragment" >
+        <action
+            android:id="@+id/action_infoExpenseFragment_to_listExpenseFragment"
+            app:destination="@id/listExpenseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMemberFragment"
+        android:name="com.example.tripplannew.AddMemberFragment"
+        android:label="AddMemberFragment" >
+        <action
+            android:id="@+id/action_addMemberFragment_to_listTripFragment"
+            app:destination="@id/listTripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pieChartFragment"
+        android:name="com.example.tripplannew.PieChartFragment"
+        android:label="PieChartFragment" />
+    <fragment
+        android:id="@+id/infoUserFragment"
+        android:name="com.example.tripplannew.InfoUserFragment"
+        android:label="InfoUserFragment" >
+        <action
+            android:id="@+id/action_infoUserFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
 </navigation>

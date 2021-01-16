@@ -16,6 +16,7 @@ public class ExpenseListViewModel extends AndroidViewModel {
     private ExpenseRepository mRepository;
     private com.example.tripplannew.data.webservice.ExpenseRepository mWebRepository;
     private String mTripId;
+    private float mTripBudget;
     private Trip mTrip;
 
     public ExpenseListViewModel(Application application)
@@ -35,7 +36,12 @@ public class ExpenseListViewModel extends AndroidViewModel {
         mWebRepository.addExpense(expense);
     }
 
-    public LiveData<List<com.example.tripplannew.data.webservice.Expense>> getAllExpenses()
+    public void updateExpense(Expense expense)
+    {
+        mWebRepository.updateExpense(expense);
+    }
+
+    public LiveData<List<Expense>> getAllExpenses()
     {
         return mWebRepository.getExpensesByTripId(mTripId);
 //        return mRepository.getAllExpenses(mTripId);
@@ -57,10 +63,20 @@ public class ExpenseListViewModel extends AndroidViewModel {
         return mTripId;
     }
 
+
+
     public void setTrip(Trip trip)
     {
         mTrip = trip;
     }
 
     public Trip getTrip() { return mTrip; }
+
+    public float getTripBudget() {
+        return mTripBudget;
+    }
+
+    public void setTripBudget(float mTripBudget) {
+        this.mTripBudget = mTripBudget;
+    }
 }
