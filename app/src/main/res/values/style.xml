@@ -58,7 +58,7 @@
             18dp
         </item>
 
-        <item name="android:letterSpacing">
+        <item name="android:letterSpacing" tools:targetApi="lollipop">
             -0.02
         </item>
 
@@ -73,12 +73,42 @@
             20dp
         </item>
 
-        <item name="android:letterSpacing">
+        <item name="android:letterSpacing" tools:targetApi="lollipop">
             -0.02
         </item>
 
         <item name="android:textColor">
             #65BCBF
+        </item>
+
+    </style>
+    <style name="incomes">
+
+        <item name="android:textSize">
+            16dp
+        </item>
+
+        <item name="android:letterSpacing" tools:targetApi="lollipop">
+            -0.02
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+    <style name="some_id">
+
+        <item name="android:textSize">
+            24dp
+        </item>
+
+        <item name="android:letterSpacing" tools:targetApi="lollipop">
+            -0.04
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
         </item>
 
     </style>

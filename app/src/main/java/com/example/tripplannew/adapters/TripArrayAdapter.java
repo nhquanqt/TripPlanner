@@ -50,7 +50,7 @@ public class TripArrayAdapter extends ArrayAdapter<Trip> {
 
     private void bindData(Trip item, ViewHolder viewHolder) {
         viewHolder.tvName.setText(item.getTripName());
-        viewHolder.tvBudget.setText(String.format("%s VND", String.valueOf(item.getBudget())));
+        viewHolder.tvBudget.setText(String.format("%s VND", String.valueOf((int)item.getBudget())));
         // TextView    tvName=(TextView) convertView.findViewById(R.id.tvName);
         // TextView tvBg       =(TextView) convertView.findViewById(R.id.tvBudget);
         // tvName.setText(item.name);

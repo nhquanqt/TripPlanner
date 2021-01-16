@@ -29,4 +29,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="Food">#FFA726</color>
+    <color name="Beverage">#66BB6A</color>
+    <color name="Move">#EF5350</color>
+    <color name="Rent">#009688</color>
+    <color name="Entertainment">#9966CC</color>
+    <color name="Phone">#29B6F6</color>
+    <color name="OtherActive">#969696</color>
+
+    <color name="color_one">#fb7268</color>
+    <color name="color_white">#ededf2</color>
+    <color name="color_two">#E3E0E0</color>
+
 </resources>
