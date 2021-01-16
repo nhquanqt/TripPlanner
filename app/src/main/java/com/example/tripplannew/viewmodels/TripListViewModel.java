@@ -23,7 +23,7 @@ public class TripListViewModel extends AndroidViewModel {
         mWebRepository = new TripRepository();
     }
 
-    public LiveData<Boolean> addTrip(Trip trip)
+    public LiveData<String> addTrip(Trip trip)
     {
         return mWebRepository.addTrip(trip);
     }

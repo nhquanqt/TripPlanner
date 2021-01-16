@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import androidx.navigation.Navigation;
 
 import com.example.tripplannew.data.webservice.Trip;
 import com.example.tripplannew.viewmodels.MapViewModel;
+import com.example.tripplannew.viewmodels.ShareViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
 
 import java.util.Calendar;
@@ -28,6 +30,7 @@ public class AddTripFragment extends Fragment {
 
     private TripListViewModel mTripListViewModel;
     private MapViewModel mMapViewModel;
+    private ShareViewModel mShareViewModel;
 
     private Button mBtnNext, mBtnCancelTrip;
     private TextView mTvStartDate, mTvEndDate, mTvDeparture;
@@ -42,6 +45,7 @@ public class AddTripFragment extends Fragment {
 
         mTripListViewModel = new ViewModelProvider(getActivity()).get(TripListViewModel.class);
         mMapViewModel = new ViewModelProvider(getActivity()).get(MapViewModel.class);
+        mShareViewModel = new ViewModelProvider(getActivity()).get(ShareViewModel.class);
 
         return inflater.inflate(R.layout.fragment_add_trip, container, false);
     }
@@ -55,6 +59,7 @@ public class AddTripFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addTrip(v);
+
             }
         });
 
@@ -128,7 +133,9 @@ public class AddTripFragment extends Fragment {
         if(stringBudget.length() == 0) stringBudget = "0";
         float budget = Float.parseFloat(stringBudget);
 //        mTripListViewModel.insert(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure));
-        mTripListViewModel.addTrip(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure)).observe(getActivity(), status -> {
+        Trip trip = new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure);
+        mTripListViewModel.addTrip(trip).observe(getActivity(), status -> {
+            mShareViewModel.setTripId(status);
             Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_addMemberFragment);
         });
     }
