@@ -83,7 +83,7 @@ urlpatterns = [
     # "id": "3"
     # }
 
-    path('share/add', views.addShare),
+    path('share/add', views.addShareByUserName),
     #http://192.168.1.3:8080/share/add
     # {
     # "idTrip": "1", 

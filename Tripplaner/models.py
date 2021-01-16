@@ -90,6 +90,8 @@ class Expense(models.Model):
 class Share(models.Model):
     idTrip = models.ForeignKey(Trip, related_name="fk_Share_trip", on_delete=models.CASCADE)
     idUser = models.ForeignKey(Account, related_name="fk_Share_user", on_delete=models.CASCADE)
+    class Meta:
+        unique_together = (("idTrip","idUser"),)
     def getIDTrip(self):
         return self.idTrip
         pass

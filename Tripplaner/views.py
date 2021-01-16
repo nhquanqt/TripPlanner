@@ -250,14 +250,18 @@ def getSharebyTripID(request):
 
 
 @csrf_exempt
-def addShare(request):
+def addShareByUserName(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     print(body)
     idt = body['idTrip']
-    idu = body['idUser']
+    userName = body['userName']
+
     idTrip = Trip.objects.get(idTrip=idt)
-    idUser = Account.objects.get(idUser=idu)
+    print(idTrip)
+    idUser = Account.objects.get(userName=userName)
+    print(idUser)
+
     Share.objects.create(idTrip= idTrip, idUser = idUser)
     obj = {"result": True}
     return JsonResponse(obj)
