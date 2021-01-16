@@ -173,11 +173,15 @@
         <action
             android:id="@+id/action_settingFragment_to_infoUserFragment"
             app:destination="@id/infoUserFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_toolsFragment"
+            app:destination="@id/toolsFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoExpenseFragment"
         android:name="com.example.tripplannew.InfoExpenseFragment"
-        android:label="InfoExpenseFragment" >
+        android:label="InfoExpenseFragment"
+        tools:layout="@layout/fragment_info_expense">
         <action
             android:id="@+id/action_infoExpenseFragment_to_listExpenseFragment"
             app:destination="@id/listExpenseFragment" />
@@ -185,7 +189,8 @@
     <fragment
         android:id="@+id/addMemberFragment"
         android:name="com.example.tripplannew.AddMemberFragment"
-        android:label="AddMemberFragment" >
+        android:label="AddMemberFragment"
+        tools:layout="@layout/fragment_addmember">
         <action
             android:id="@+id/action_addMemberFragment_to_listTripFragment"
             app:destination="@id/listTripFragment" />
@@ -193,13 +198,34 @@
     <fragment
         android:id="@+id/pieChartFragment"
         android:name="com.example.tripplannew.PieChartFragment"
-        android:label="PieChartFragment" />
+        android:label="PieChartFragment"
+        tools:layout="@layout/fragment_pie_chart"/>
     <fragment
         android:id="@+id/infoUserFragment"
         android:name="com.example.tripplannew.InfoUserFragment"
-        android:label="InfoUserFragment" >
+        android:label="InfoUserFragment"
+        tools:layout="@layout/fragment_info_user">
         <action
             android:id="@+id/action_infoUserFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.example.tripplannew.ToolsFragment"
+        android:label="ToolsFragment"
+        tools:layout="@layout/fragment_tools">
+        <action
+            android:id="@+id/action_toolsFragment_to_findPlacesFragment"
+            app:destination="@id/findPlacesFragment" />
+        <action
+            android:id="@+id/action_toolsFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:popUpTo="@id/settingFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/findPlacesFragment"
+        android:name="com.example.tripplannew.FindPlacesFragment"
+        android:label="fragment_find_places"
+        tools:layout="@layout/fragment_find_places" />
 </navigation>

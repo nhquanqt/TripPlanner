@@ -73,6 +73,14 @@ public class SettingFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_infoUserFragment);
             }
         });
+
+        mRLTool = getActivity().findViewById(R.id.rl_tools);
+        mRLTool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_toolsFragment);
+            }
+        });
     }
 
 
