@@ -13,6 +13,7 @@
         >
 
         <RelativeLayout
+            android:id="@+id/list_expense_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/blue">
@@ -133,6 +134,12 @@
                     android:src="@drawable/bieudo"
                     android:id="@+id/imBieuDo"
                     app:egInnerPaddingColor="@color/blue"
+                    app:egAnimationTime="500"
+                    app:egInnerPadding="85"
+                    app:egUseInnerValue="true"
+                    app:egInnerValueString="0%"
+                    app:egInnerValueColor="@color/white"
+                    app:egInnerValueSize="40dp"
                     />
 
             </RelativeLayout>

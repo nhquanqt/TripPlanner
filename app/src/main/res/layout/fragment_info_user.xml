@@ -63,9 +63,10 @@
                 android:textAppearance="@style/type"/>
             <EditText
                 android:id="@+id/show_name_infouser"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Nguyễn Văn A"
+                android:gravity="right"
+                android:text=""
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="13.5dp"
                 android:layout_centerVertical="true"
@@ -88,9 +89,10 @@
                 android:textAppearance="@style/type"/>
             <Button
                 android:id="@+id/etDateOfBirth_infouser"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="1/1/2020"
+                android:gravity="right"
+                android:text=""
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="13.5dp"
                 android:layout_centerVertical="true"
@@ -115,9 +117,10 @@
                 android:textAppearance="@style/type"/>
             <EditText
                 android:id="@+id/etPlaceOfBirth_infouser"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Quảng Trị"
+                android:gravity="right"
+                android:text=""
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="13.5dp"
                 android:layout_centerVertical="true"

@@ -56,8 +56,9 @@
                 android:textAppearance="@style/type"/>
 
         </RelativeLayout>
-        <RelativeLayout
 
+        <RelativeLayout
+            android:id="@+id/rl_tools"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"

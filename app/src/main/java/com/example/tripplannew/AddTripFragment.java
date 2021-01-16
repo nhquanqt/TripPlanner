@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import androidx.navigation.Navigation;
 
 import com.example.tripplannew.data.webservice.Trip;
 import com.example.tripplannew.viewmodels.MapViewModel;
+import com.example.tripplannew.viewmodels.ShareViewModel;
 import com.example.tripplannew.viewmodels.TripListViewModel;
 
 import java.util.Calendar;
@@ -28,9 +30,11 @@ public class AddTripFragment extends Fragment {
 
     private TripListViewModel mTripListViewModel;
     private MapViewModel mMapViewModel;
+    private ShareViewModel mShareViewModel;
 
     private Button mBtnNext, mBtnCancelTrip;
-    private TextView mTvStartDate, mTvEndDate, mTvDeparture;
+    private TextView mTvStartDate, mTvEndDate;
+    private EditText mTvDeparture;
 
     private DatePickerDialog.OnDateSetListener tvStartSetListener, tvEndSetListener;
     private String mStartDate, mEndDate;
@@ -42,6 +46,7 @@ public class AddTripFragment extends Fragment {
 
         mTripListViewModel = new ViewModelProvider(getActivity()).get(TripListViewModel.class);
         mMapViewModel = new ViewModelProvider(getActivity()).get(MapViewModel.class);
+        mShareViewModel = new ViewModelProvider(getActivity()).get(ShareViewModel.class);
 
         return inflater.inflate(R.layout.fragment_add_trip, container, false);
     }
@@ -55,6 +60,7 @@ public class AddTripFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addTrip(v);
+
             }
         });
 
@@ -82,14 +88,7 @@ public class AddTripFragment extends Fragment {
             }
         });
 
-        mTvDeparture =(TextView)getActivity().findViewById(R.id.tvDeparture);
-        mTvDeparture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMapViewModel.setBackActionId(R.id.action_mapFragment_to_addTripFragment);
-                Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_mapFragment);
-            }
-        });
+        mTvDeparture =(EditText) getActivity().findViewById(R.id.tvDeparture);
 
         tvStartSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -107,13 +106,6 @@ public class AddTripFragment extends Fragment {
                 mTvEndDate.setText(mEndDate);
             }
         };
-
-        mMapViewModel.getLocation().observe(getActivity(), location -> {
-            if(location != null && location.length() > 0)
-            {
-                mTvDeparture.setText(location);
-            }
-        });
     }
 
     private void addTrip(View v)
@@ -122,13 +114,15 @@ public class AddTripFragment extends Fragment {
         String stringBudget = ((EditText)getActivity().findViewById(R.id.etBudget)).getText().toString();
         String startDate = ((Button)getActivity().findViewById(R.id.tvStartDate)).getText().toString();
         String endDate = ((Button)getActivity().findViewById(R.id.tvEndDate)).getText().toString();
-        String departure = ((Button)getActivity().findViewById(R.id.tvDeparture)).getText().toString();
+        String departure = ((EditText)getActivity().findViewById(R.id.tvDeparture)).getText().toString();
 
 
         if(stringBudget.length() == 0) stringBudget = "0";
         float budget = Float.parseFloat(stringBudget);
 //        mTripListViewModel.insert(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure));
-        mTripListViewModel.addTrip(new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure)).observe(getActivity(), status -> {
+        Trip trip = new Trip(mTripListViewModel.getUserId(), tripName, budget, startDate, endDate, departure);
+        mTripListViewModel.addTrip(trip).observe(getActivity(), status -> {
+            mShareViewModel.setTripId(status);
             Navigation.findNavController(v).navigate(R.id.action_addTripFragment_to_addMemberFragment);
         });
     }

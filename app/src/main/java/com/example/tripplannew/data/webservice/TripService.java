@@ -20,5 +20,5 @@ public interface TripService {
     Call<Result<Boolean>> deleteTrip(@Body Trip trip);
 
     @POST("/trip/add")
-    Call<Result<Boolean>> addTrip(@Body Trip trip);
+    Call<Result<String>> addTrip(@Body Trip trip);
 }

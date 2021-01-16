@@ -15,6 +15,7 @@ public class TripListViewModel extends AndroidViewModel {
     private com.example.tripplannew.data.local.TripRepository mRepository;
     private TripRepository mWebRepository;
     private String mUserId;
+    private  String mUserName;
 
     public TripListViewModel(Application application)
     {
@@ -23,7 +24,7 @@ public class TripListViewModel extends AndroidViewModel {
         mWebRepository = new TripRepository();
     }
 
-    public LiveData<Boolean> addTrip(Trip trip)
+    public LiveData<String> addTrip(Trip trip)
     {
         return mWebRepository.addTrip(trip);
     }
@@ -54,4 +55,11 @@ public class TripListViewModel extends AndroidViewModel {
     }
 
 
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String mUserName) {
+        this.mUserName = mUserName;
+    }
 }
