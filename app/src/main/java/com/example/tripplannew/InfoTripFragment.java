@@ -35,7 +35,7 @@ public class InfoTripFragment extends Fragment {
     private EditText mEtBudget;
     private Button mBtnStartDate;
     private Button mBtnEndDate;
-    private Button mBtnDeparture;
+    private EditText mBtnDeparture;
     private Button mBtnTripSubmit;
     private Button mBtnDelete;
 
@@ -110,22 +110,6 @@ public class InfoTripFragment extends Fragment {
             }
         };
 
-        mBtnDeparture = getActivity().findViewById(R.id.tvDeparture);
-        mBtnDeparture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMapViewModel.setBackActionId(R.id.action_mapFragment_to_infoTripFragment);
-                Navigation.findNavController(v).navigate(R.id.action_infoTripFragment_to_mapFragment);
-            }
-        });
-
-        mMapViewModel.getLocation().observe(getActivity(), location -> {
-            if(location != null && location.length() > 0)
-            {
-                mBtnDeparture.setText(location);
-            }
-        });
-
         mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,7 +133,7 @@ public class InfoTripFragment extends Fragment {
                 String stringBudget = ((EditText)getActivity().findViewById(R.id.etBudget)).getText().toString();
                 String startDate = ((Button)getActivity().findViewById(R.id.tvStartDate)).getText().toString();
                 String endDate = ((Button)getActivity().findViewById(R.id.tvEndDate)).getText().toString();
-                String departure = ((Button)getActivity().findViewById(R.id.tvDeparture)).getText().toString();
+                String departure = ((EditText)getActivity().findViewById(R.id.tvDeparture)).getText().toString();
 
                 if(stringBudget.length() == 0) stringBudget = "0";
                 float budget = Float.parseFloat(stringBudget);

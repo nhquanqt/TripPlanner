@@ -36,7 +36,7 @@ public class InfoExpenseFragment extends Fragment {
     private Spinner mStype;
     private Button mBtnSubmitExpense;
     private Button mBtnBack;
-    private Button mBtnPlace;
+    private EditText mBtnPlace;
     private Button mBtnDate;
     private Button mBtnDelete;
 
@@ -102,17 +102,6 @@ public class InfoExpenseFragment extends Fragment {
         });
 
 
-        mBtnPlace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMapViewModel.setBackActionId(R.id.action_mapFragment_to_addExpenseFragment);
-                Navigation.findNavController(v).navigate(R.id.action_addExpenseFragment_to_mapFragment);
-            }
-        });
-
-
-
-
         mBtnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,13 +118,6 @@ public class InfoExpenseFragment extends Fragment {
             }
         };
 
-        mMapViewModel.getLocation().observe(getActivity(), location -> {
-            if(location != null && location.length() > 0)
-            {
-                mBtnPlace.setText(location);
-            }
-        });
-
     }
 
     private void updateExpense(View v)
@@ -145,7 +127,7 @@ public class InfoExpenseFragment extends Fragment {
         if ((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())).length() != 0)
             cost = Integer.parseInt((String.valueOf(((EditText)getActivity().findViewById(R.id.item_cost)).getText())));
         String date = ((Button)getActivity().findViewById(R.id.item_date)).getText().toString();
-        String place = ((Button)getActivity().findViewById(R.id.item_place)).getText().toString();
+        String place = ((EditText)getActivity().findViewById(R.id.item_place)).getText().toString();
         mExpense.update("", cost, type, date,place);
         mExpenseListViewModel.updateExpense(mExpense).observe(getActivity(), status -> {
             Navigation.findNavController(v).navigate(R.id.action_infoExpenseFragment_to_listExpenseFragment);
