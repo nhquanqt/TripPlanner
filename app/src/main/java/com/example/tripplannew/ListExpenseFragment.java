@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -86,13 +88,29 @@ public class ListExpenseFragment extends Fragment {
                 mListView.setAdapter(adapter);
                 setTotalCost(adapter);
                 int totalCost = (int)mExpenseListViewModel.getTotalCost();
+
+                int percent = (int)(100.0f * totalCost / budget);
+
+                if (percent < 1000)
+                {
+                    mPieChart.setInnerValueString(String.format("%d%%", percent));
+                }
+                else
+                {
+                    mPieChart.setInnerValueString(String.format("..."));
+                }
+
                 if(totalCost>budget){
-                    TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
-                    total.setTextColor(R.color.red123);
+//                    TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
+//                    total.setTextColor(R.color.Red);
+                    RelativeLayout relativeLayout = getActivity().findViewById(R.id.list_expense_background);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.Red));
+                    mPieChart.setInnerPaddingColor(getResources().getColor(R.color.Red));
                     mPieChart.addPieSlice(new PieModel(
                             "Quá ngân sách",
                             100,
-                            Color.parseColor("#FF0000")));
+                            getResources().getColor(R.color.white)
+                    ));
 
                 }
                 else {
@@ -100,12 +118,14 @@ public class ListExpenseFragment extends Fragment {
                             new PieModel(
                                     "Chi tiêu",
                                     totalCost,
-                                    Color.parseColor("#66FF33")));
+                                    getResources().getColor(R.color.white)
+                            ));
                     mPieChart.addPieSlice(
                             new PieModel(
                                     "Ngân sách",
                                     budget - totalCost,
-                                    Color.parseColor("#FFFFFF")));
+                                    getResources().getColor(R.color.blue)
+                            ));
 
 
                 }

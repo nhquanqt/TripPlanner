@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,6 +12,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -28,6 +32,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -126,10 +132,21 @@ public class FindPlacesFragment extends Fragment implements OnMapReadyCallback {
                     {
                         Place place = placeList.get(i);
                         LatLng latLng = new LatLng(place.getLat(), place.getLon());
+
+                        String name = "Unknown";
+
+                        if(place.getName() != null)
+                        {
+                            name = place.getName();
+                        }
+
                         mGoogleMap.addMarker(
                                 new MarkerOptions()
                                         .position(latLng)
-                                        .title("" + place.getName())
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                        .alpha(0.8f)
+                                        .title(name)
+
                         );
                     }
                 });;
