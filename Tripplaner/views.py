@@ -84,12 +84,15 @@ def Signup(request):
 def getTripsByUserID(request):
     id = request.GET['userId']
     result = []
+    listShareTripID = Share.objects.filter(idUser=id).all()
+    
     trip = Trip.objects.all()
-    for tripi in trip:
-        idUser =  tripi.getIDUser()
-        if id == idUser.idUser:
-            obj = {"id": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
-            result.append(obj)
+
+    for shareTripID in listShareTripID:
+        tripi = Trip.objects.filter(idTrip=shareTripID.getIDTrip().idTrip).first()
+        obj = {"id": tripi.getIDTrip(), "tripName": tripi.getTripName(), "budget": tripi.getBudget(), "startDate": tripi.getStartDate(), "endDate": tripi.getEndDate(), "departure": tripi.getDeparture()}
+        result.append(obj)
+
     res = {"result": result}
     return JsonResponse(res)
     pass
@@ -141,7 +144,7 @@ def addTrip(request):
     idUser = Account.objects.get(idUser=idu)
     ID = str(int(ID) + 1)
     Trip.objects.create(idTrip = ID, idUser = idUser, tripName=name, budget=bud, startDate=start, endDate=end, departure=dep)
-    obj = {"result": True}
+    obj = {"result": ID}
     return JsonResponse(obj)
     pass
 
@@ -229,6 +232,45 @@ def deleteExpenseByID(request):
 
     id = body['id']
     Expense.objects.filter(idExpense=id).delete()    
+    obj = {"result": True}
+    return JsonResponse(obj)
+    pass
+
+def getSharebyTripID(request):
+    idTrip = request.GET['idTrip']
+    result = []
+    shares = Share.objects.all()
+    for share in shares:
+        if idTrip == share.getIDTrip().idTrip:
+            obj = {"idTrip": share.getIDTrip().idTrip, "idUser": share.getIDUser().idUser}
+            result.append(obj)
+    res = {"result": result}
+    return JsonResponse(res)
+    pass
+
+
+@csrf_exempt
+def addShare(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    print(body)
+    idt = body['idTrip']
+    idu = body['idUser']
+    idTrip = Trip.objects.get(idTrip=idt)
+    idUser = Account.objects.get(idUser=idu)
+    Share.objects.create(idTrip= idTrip, idUser = idUser)
+    obj = {"result": True}
+    return JsonResponse(obj)
+    pass
+
+
+@csrf_exempt
+def deleteShareByTripID(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    idt = body['idTrip']
+    idTrip = Trip.objects.get(idTrip=idt)
+    Share.objects.filter(idTrip=idTrip).delete()
     obj = {"result": True}
     return JsonResponse(obj)
     pass

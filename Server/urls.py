@@ -82,6 +82,20 @@ urlpatterns = [
     # {
     # "id": "3"
     # }
+
+    path('share/add', views.addShare),
+    #http://192.168.1.3:8080/share/add
+    # {
+    # "idTrip": "1", 
+    # "expenseName": "an choi", 
+    # "cost": 300000.0, 
+    # "type": 3
+    # }
+    path('share/delete', views.deleteShareByTripID),
+    #http://192.168.1.3:8080/share/delete
+    # {
+    # "id": "3"
+    # }
     url(r'^login', views.Login),
     #http://192.168.1.3:8080/login?u=fit18&p=fit18
     url(r'^user', views.getUserByID),
@@ -92,7 +106,9 @@ urlpatterns = [
     #http://192.168.1.3:8080/gettripbyID?id=1
     url(r'^expenses', views.getExpensebyIDTrip),
     #http://192.168.1.3:8080/expenses?idTrip=1
-    url(r'^getexpensebyID', views.getExpensebyID)
+    url(r'^getexpensebyID', views.getExpensebyID),
     #http://192.168.1.3:8080/getexpensebyID?id=1
+    url(r'^shares', views.getSharebyTripID)
+    #http://192.168.1.3:8080/shares?idTrip=1
     
 ]
