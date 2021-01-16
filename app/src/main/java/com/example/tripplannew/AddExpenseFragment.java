@@ -55,8 +55,7 @@ public class AddExpenseFragment extends Fragment {
         mBtnSubmitExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addExpense();
-                Navigation.findNavController(v).navigate(R.id.action_addExpenseFragment_to_listExpenseFragment);
+                addExpense(v);
             }
         });
 
@@ -102,7 +101,7 @@ public class AddExpenseFragment extends Fragment {
         });
     }
 
-    private void addExpense()
+    private void addExpense(View v)
     {
         int cost = 0;
         int type = ((Spinner)getActivity().findViewById(R.id.item_type)).getSelectedItemPosition();
@@ -113,9 +112,10 @@ public class AddExpenseFragment extends Fragment {
         String date = ((Button)getActivity().findViewById(R.id.item_date)).getText().toString();
         String place = ((Button)getActivity().findViewById(R.id.item_place)).getText().toString();
         Log.i("check", date);
-        mExpenseListViewModel.addExpense(new Expense(mExpenseListViewModel.getTripId(), "", cost, type, date, place));
-//        mExpenseListViewModel.addExpense(new Expense(mExpenseListViewModel.getTripId(), "", cost, type, item_type));
-
+        Expense expense = new Expense(mExpenseListViewModel.getTripId(), "", cost, type, date, place);
+        mExpenseListViewModel.addExpense(expense).observe(getActivity(), status -> {
+            Navigation.findNavController(v).navigate(R.id.action_addExpenseFragment_to_listExpenseFragment);
+        });
     }
 
 

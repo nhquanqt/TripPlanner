@@ -55,7 +55,7 @@ public class ListExpenseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         int budget = (int)mExpenseListViewModel.getTripBudget();
-        int totalexpense = 1000000;
+
         mListView = getActivity().findViewById(R.id.listViewExpense);
 
         mTvTripName = getActivity().findViewById(R.id.tvTripName);
@@ -65,15 +65,37 @@ public class ListExpenseFragment extends Fragment {
         trip_budget.setText(String.format("%s VND", String.valueOf(budget)));
 
 
+        mPieChart = getActivity().findViewById(R.id.imBieuDo);
+
+        mPieChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_listExpenseFragment_to_pieChartFragment);
+            }
+        });
 
         mExpenseListViewModel.getAllExpenses().observe(getActivity(), expenses -> {
             Activity activity = getActivity();
             if(activity != null)
             {
                 mExpenseArray = new ArrayList<>(expenses);
+                mExpenseListViewModel.setExpenses(mExpenseArray);
                 ExpenseArrayAdapter adapter = new ExpenseArrayAdapter(getActivity(), mExpenseArray);
                 mListView.setAdapter(adapter);
                 setTotalCost(adapter);
+                int totalCost = (int)mExpenseListViewModel.getTotalCost();
+                mPieChart.addPieSlice(
+                        new PieModel(
+                                "Ngân sách",
+                                budget - totalCost,
+                                Color.parseColor("#FFFFFF")));
+                mPieChart.addPieSlice(
+                        new PieModel(
+                                "Chi tiêu",
+                                totalCost,
+                                Color.parseColor("#DC7633")));
+
+                mPieChart.startAnimation();
             }
         });
 
@@ -82,27 +104,6 @@ public class ListExpenseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_listExpenseFragment_to_addExpenseFragment);
-            }
-        });
-
-        mPieChart = getActivity().findViewById(R.id.imBieuDo);
-        mPieChart.addPieSlice(
-                new PieModel(
-                        "Ngân sách",
-                        budget,
-                        Color.parseColor("#FFFFFF")));
-        mPieChart.addPieSlice(
-                new PieModel(
-                        "Chi tiêu",
-                        totalexpense,
-                        Color.parseColor("#DC7633")));
-        mPieChart.startAnimation();
-
-
-        mPieChart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_listExpenseFragment_to_pieChartFragment);
             }
         });
 
@@ -131,5 +132,6 @@ public class ListExpenseFragment extends Fragment {
     private void setTotalCost(ExpenseArrayAdapter adapter) {
         TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
         total.setText(String.format("%s VND", String.valueOf(adapter.Total_cost())));
+        mExpenseListViewModel.setTotalCost(adapter.Total_cost());
     }
 }

@@ -155,8 +155,9 @@ public class InfoTripFragment extends Fragment {
                 float budget = Float.parseFloat(stringBudget);
 
                 mTrip.update(tripName, budget, startDate, endDate, departure);
-                mTripListViewModel.updateTrip(mTrip);
-                Navigation.findNavController(v).navigate(R.id.action_infoTripFragment_to_listTripFragment);
+                mTripListViewModel.updateTrip(mTrip).observe(getActivity(), status -> {
+                    Navigation.findNavController(v).navigate(R.id.action_infoTripFragment_to_listTripFragment);
+                });
             }
         });
     }

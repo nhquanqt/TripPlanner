@@ -37,9 +37,9 @@ public class TripListViewModel extends AndroidViewModel {
     {
         return mWebRepository.deleteTrip(trip);
     }
-    public void updateTrip(Trip trip)
+    public LiveData<Boolean> updateTrip(Trip trip)
     {
-        mWebRepository.updateTrip(trip);
+        return mWebRepository.updateTrip(trip);
     }
 
     public void setUserId(String userId)
