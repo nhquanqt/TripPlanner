@@ -1,5 +1,7 @@
 package com.example.tripplannew;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
@@ -104,13 +106,28 @@ public class ListExpenseFragment extends Fragment {
 //                    TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
 //                    total.setTextColor(R.color.Red);
                     RelativeLayout relativeLayout = getActivity().findViewById(R.id.list_expense_background);
-                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.Red));
-                    mPieChart.setInnerPaddingColor(getResources().getColor(R.color.Red));
+//                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.Red));
+
+                    int colorFrom = getResources().getColor(R.color.blue);
+                    int colorTo = getResources().getColor(R.color.Red);
+
+//                    mPieChart.setInnerPaddingColor(getResources().getColor(R.color.Red));
                     mPieChart.addPieSlice(new PieModel(
                             "Quá ngân sách",
                             100,
                             getResources().getColor(R.color.white)
                     ));
+
+                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                    colorAnimation.setDuration(250);
+                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            relativeLayout.setBackgroundColor((int) animator.getAnimatedValue());
+                            mPieChart.setInnerPaddingColor((int) animator.getAnimatedValue());
+                        }
+                    });
+                    colorAnimation.start();
 
                 }
                 else {
@@ -129,7 +146,6 @@ public class ListExpenseFragment extends Fragment {
 
 
                 }
-
 
                 mPieChart.startAnimation();
             }
