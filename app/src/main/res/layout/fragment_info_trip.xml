@@ -233,11 +233,11 @@
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="310dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="500dp"
-            android:background="@drawable/layout_bg10"
+            android:backgroundTint="@color/Red"
             android:text="Xóa" />
     </RelativeLayout>
 
