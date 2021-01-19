@@ -1,5 +1,7 @@
 package com.example.tripplannew;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,6 +44,7 @@ public class ListExpenseFragment extends Fragment {
     private PieChart mPieChart;
     private ExpenseInfoViewModel mExpenseInfoViewModel;
     private ArrayList<Expense> mExpenseArray;
+    final private int ANIMATION_DURATION = 500;
 
 
     @Nullable
@@ -93,7 +97,20 @@ public class ListExpenseFragment extends Fragment {
 
                 if (percent < 1000)
                 {
-                    mPieChart.setInnerValueString(String.format("%d%%", percent));
+//                    mPieChart.setInnerValueString(String.format("%d%%", percent);
+                    ValueAnimator percentAnimation = ValueAnimator.ofInt(0, percent);
+                    percentAnimation.setDuration(ANIMATION_DURATION);
+                    percentAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+
+                    percentAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                        @Override
+                        public void onAnimationUpdate(final ValueAnimator animator) {
+                            mPieChart.setInnerValueString(String.format("%d%%", animator.getAnimatedValue()));
+                        }
+                    });
+
+                    percentAnimation.start();
                 }
                 else
                 {
@@ -104,13 +121,28 @@ public class ListExpenseFragment extends Fragment {
 //                    TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
 //                    total.setTextColor(R.color.Red);
                     RelativeLayout relativeLayout = getActivity().findViewById(R.id.list_expense_background);
-                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.Red));
-                    mPieChart.setInnerPaddingColor(getResources().getColor(R.color.Red));
+//                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.Red));
+
+                    int colorFrom = getResources().getColor(R.color.blue);
+                    int colorTo = getResources().getColor(R.color.Red);
+
+//                    mPieChart.setInnerPaddingColor(getResources().getColor(R.color.Red));
                     mPieChart.addPieSlice(new PieModel(
                             "Quá ngân sách",
                             100,
                             getResources().getColor(R.color.white)
                     ));
+
+                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                    colorAnimation.setDuration(ANIMATION_DURATION);
+                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            relativeLayout.setBackgroundColor((int) animator.getAnimatedValue());
+                            mPieChart.setInnerPaddingColor((int) animator.getAnimatedValue());
+                        }
+                    });
+                    colorAnimation.start();
 
                 }
                 else {
@@ -129,7 +161,6 @@ public class ListExpenseFragment extends Fragment {
 
 
                 }
-
 
                 mPieChart.startAnimation();
             }
@@ -167,7 +198,23 @@ public class ListExpenseFragment extends Fragment {
 
     private void setTotalCost(ExpenseArrayAdapter adapter) {
         TextView total = (TextView)getActivity().findViewById(R.id.total_cost);
-        total.setText(String.format("%s VND", String.valueOf(adapter.Total_cost())));
+//        total.setText(String.format("%s VND", String.valueOf(adapter.Total_cost())));
         mExpenseListViewModel.setTotalCost(adapter.Total_cost());
+
+        ValueAnimator costAnimation = ValueAnimator.ofInt(0, adapter.Total_cost());
+        costAnimation.setDuration(ANIMATION_DURATION);
+        costAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        costAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(final ValueAnimator animator) {
+                total.setText(
+                        String.format("%s VND", String.valueOf(animator.getAnimatedValue()))
+                );
+            }
+        });
+
+        costAnimation.start();
     }
 }
